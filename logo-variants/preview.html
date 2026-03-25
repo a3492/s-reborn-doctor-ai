@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SW 로고 미리보기 — 핑크 아이보리</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:Georgia,'Palatino Linotype',serif;
+    background: linear-gradient(135deg,#fdf0e8 0%,#f5e4d8 50%,#eeddd0 100%);
+    min-height:100vh;
+    padding:44px 24px 80px;
+    color:#3d1f1a
+  }
+  h1{font-size:26px;font-weight:700;font-style:italic;margin-bottom:6px;color:#7a4035;letter-spacing:.02em}
+  .sub{font-size:14px;color:#9a7060;font-family:'Segoe UI',sans-serif;margin-bottom:40px;font-style:normal}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1060px}
+
+  .card{
+    background:rgba(253,245,238,.96);
+    border:1px solid #e2cfc4;
+    border-radius:20px;
+    padding:26px 24px 28px;
+    box-shadow:0 6px 28px rgba(122,64,53,.08)
+  }
+  .card-title{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#c9a07a;
+    font-family:'Segoe UI',sans-serif;
+    font-style:normal;
+    margin-bottom:18px
+  }
+
+  /* size previews */
+  .size-row{display:flex;align-items:flex-end;gap:18px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid #e8d8cc}
+  .size-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .size-label{font-size:10px;color:#b09080;font-family:'Segoe UI',sans-serif;font-style:normal}
+
+  /* topnav mockup */
+  .topnav-mock{
+    display:flex;align-items:center;gap:9px;
+    background:#fff;
+    border:1px solid #e2cfc4;
+    border-radius:10px;
+    padding:9px 14px;
+    margin-bottom:10px
+  }
+  .topnav-brand{font-size:15px;font-weight:700;font-style:italic;color:#3d1f1a;font-family:Georgia,serif}
+
+  /* dark bg test */
+  .dark-test{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    background:#3d1f1a;
+    border-radius:10px;
+    padding:14px;
+  }
+
+  /* note section */
+  .note{
+    margin-top:10px;
+    font-size:12px;
+    color:#9a7060;
+    font-family:'Segoe UI',sans-serif;
+    font-style:normal;
+    line-height:1.55
+  }
+
+  /* recommended badge */
+  .rec-badge{
+    display:inline-block;
+    padding:3px 10px;
+    background:#c9a07a;
+    color:#fff;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+    font-family:'Segoe UI',sans-serif;
+    font-style:normal;
+    margin-bottom:12px
+  }
+
+  /* tip box */
+  .tip-box{
+    max-width:1060px;
+    margin-top:30px;
+    background:rgba(253,245,238,.96);
+    border:1px solid #e2cfc4;
+    border-radius:16px;
+    padding:22px 26px
+  }
+  .tip-box p{font-size:14px;color:#7a4035;line-height:1.8;font-family:'Segoe UI',sans-serif;font-style:normal}
+  .tip-box strong{font-style:italic;font-family:Georgia,serif}
+</style>
+</head>
+<body>
+
+  <h1>SW — S-Reborn World</h1>
+  <p class="sub">핑크 아이보리 · 이탤릭 세리프 · 4가지 디자인 비교</p>
+
+  <div class="grid">
+
+    <!-- ① Block -->
+    <div class="card">
+      <div class="card-title">① 블록 모노그램</div>
+      <div class="size-row">
+        <div class="size-item">
+          <img src="./sw-logo-1-block.svg" style="width:80px;height:80px;border-radius:18px"/>
+          <span class="size-label">80 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-1-block.svg" style="width:40px;height:40px;border-radius:9px"/>
+          <span class="size-label">40 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-1-block.svg" style="width:24px;height:24px;border-radius:6px"/>
+          <span class="size-label">24 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-1-block.svg" style="width:16px;height:16px;border-radius:4px"/>
+          <span class="size-label">16 px</span>
+        </div>
+      </div>
+      <div class="topnav-mock">
+        <img src="./sw-logo-1-block.svg" style="width:28px;height:28px;border-radius:7px"/>
+        <span class="topnav-brand">S-Reborn</span>
+      </div>
+      <div class="dark-test">
+        <img src="./sw-logo-1-block.svg" style="width:44px;height:44px;border-radius:10px"/>
+        <img src="./sw-logo-1-block.svg" style="width:28px;height:28px;border-radius:7px"/>
+        <img src="./sw-logo-1-block.svg" style="width:18px;height:18px;border-radius:4px"/>
+      </div>
+      <p class="note">로즈우드 그라디언트 + 아이보리 이탤릭. favicon·앱아이콘에 가장 강함.</p>
+    </div>
+
+    <!-- ② Circle -->
+    <div class="card">
+      <div class="card-title">② 원형 엠블럼</div>
+      <div class="size-row">
+        <div class="size-item">
+          <img src="./sw-logo-2-circle.svg" style="width:80px;height:80px"/>
+          <span class="size-label">80 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-2-circle.svg" style="width:40px;height:40px"/>
+          <span class="size-label">40 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-2-circle.svg" style="width:24px;height:24px"/>
+          <span class="size-label">24 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-2-circle.svg" style="width:16px;height:16px"/>
+          <span class="size-label">16 px</span>
+        </div>
+      </div>
+      <div class="topnav-mock">
+        <img src="./sw-logo-2-circle.svg" style="width:28px;height:28px"/>
+        <span class="topnav-brand">S-Reborn</span>
+      </div>
+      <div class="dark-test">
+        <img src="./sw-logo-2-circle.svg" style="width:44px;height:44px"/>
+        <img src="./sw-logo-2-circle.svg" style="width:28px;height:28px"/>
+        <img src="./sw-logo-2-circle.svg" style="width:18px;height:18px"/>
+      </div>
+      <p class="note">골드 외곽 링 + 내부 로즈우드. 격식 있고 고급스러운 느낌.</p>
+    </div>
+
+    <!-- ③ Split -->
+    <div class="card">
+      <div class="card-title">③ 스플릿 컬러</div>
+      <div class="size-row">
+        <div class="size-item">
+          <img src="./sw-logo-3-split.svg" style="width:80px;height:80px;border-radius:18px"/>
+          <span class="size-label">80 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-3-split.svg" style="width:40px;height:40px;border-radius:9px"/>
+          <span class="size-label">40 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-3-split.svg" style="width:24px;height:24px;border-radius:6px"/>
+          <span class="size-label">24 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-3-split.svg" style="width:16px;height:16px;border-radius:4px"/>
+          <span class="size-label">16 px</span>
+        </div>
+      </div>
+      <div class="topnav-mock">
+        <img src="./sw-logo-3-split.svg" style="width:28px;height:28px;border-radius:7px"/>
+        <span class="topnav-brand">S-Reborn</span>
+      </div>
+      <div class="dark-test">
+        <img src="./sw-logo-3-split.svg" style="width:44px;height:44px;border-radius:10px"/>
+        <img src="./sw-logo-3-split.svg" style="width:28px;height:28px;border-radius:7px"/>
+        <img src="./sw-logo-3-split.svg" style="width:18px;height:18px;border-radius:4px"/>
+      </div>
+      <p class="note">로즈우드 / 아이보리 이분할. 개성 있고 기억에 남는 구조.</p>
+    </div>
+
+    <!-- ④ Minimal -->
+    <div class="card">
+      <div class="card-title">④ 미니멀 + 골드 라인</div>
+      <div class="size-row">
+        <div class="size-item">
+          <img src="./sw-logo-4-minimal.svg" style="width:80px;height:80px;border-radius:18px"/>
+          <span class="size-label">80 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-4-minimal.svg" style="width:40px;height:40px;border-radius:9px"/>
+          <span class="size-label">40 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-4-minimal.svg" style="width:24px;height:24px;border-radius:6px"/>
+          <span class="size-label">24 px</span>
+        </div>
+        <div class="size-item">
+          <img src="./sw-logo-4-minimal.svg" style="width:16px;height:16px;border-radius:4px"/>
+          <span class="size-label">16 px</span>
+        </div>
+      </div>
+      <div class="topnav-mock">
+        <img src="./sw-logo-4-minimal.svg" style="width:28px;height:28px;border-radius:7px"/>
+        <span class="topnav-brand">S-Reborn</span>
+      </div>
+      <div class="dark-test" style="background:#faf0e6;border:1px solid #e2cfc4">
+        <img src="./sw-logo-4-minimal.svg" style="width:44px;height:44px;border-radius:10px"/>
+        <img src="./sw-logo-4-minimal.svg" style="width:28px;height:28px;border-radius:7px"/>
+        <img src="./sw-logo-4-minimal.svg" style="width:18px;height:18px;border-radius:4px"/>
+      </div>
+      <p class="note">아이보리 배경 + 골드 테두리 + 아웃라인 이탤릭. 밝은 배경 전용.</p>
+    </div>
+
+  </div>
+
+  <div class="tip-box">
+    <p>
+      <strong>① 블록</strong> — 가장 범용적. favicon·앱아이콘·어두운 배경 모두 OK<br/>
+      <strong>② 원형</strong> — 골드 링으로 고급감 극대화. 프로필·소셜 미디어에 적합<br/>
+      <strong>③ 스플릿</strong> — 큰 크기에서 가장 인상적. 헤더 로고로 사용 시 최고<br/>
+      <strong>④ 미니멀</strong> — 아이보리 배경 사이트 전용. 텍스트 옆 로크업 시 세련됨
+    </p>
+  </div>
+
+</body>
+</html>

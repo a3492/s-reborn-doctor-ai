@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      S-Reborn 의사용 AI 콘텐츠 인덱스
+    </title>
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+    <link rel="apple-touch-icon" href="./assets/s-reborn-logo.svg" />
+    <meta name="description" content="S-Reborn 의사용 AI 교육 HTML 문서를 메타데이터 기준으로 분류해 보여주는 내부 인덱스 페이지" />
+    <style>
+:root{--bg:#f4eee4;--paper:rgba(255,252,246,.92);--ink:#1f292d;--muted:#5c666b;--line:#d8cebf;--brand:#145b4b;--chip:#ece4d7;--chip-active:#dceee8;--status-draft:#f7efe0;--status-draft-ink:#8a5d18;--status-review:#e7f0fb;--status-review-ink:#2b5a9e;--status-published:#e5f2ea;--status-published-ink:#1d6a47}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font-family:"Segoe UI","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;background:radial-gradient(circle at top left,#f8dfc7 0,transparent 18%),radial-gradient(circle at top right,#e8f1ea 0,transparent 22%),linear-gradient(180deg,#f4eee4 0%,#efe4d4 100%)}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 20px 72px}
+.topnav,.hero,.panel,.card{background:var(--paper);border:1px solid var(--line);border-radius:24px;box-shadow:0 14px 36px rgba(31,41,45,.06)}
+.topnav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 18px;margin-bottom:18px}
+.brandmark{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700}
+.brandmark img{width:28px;height:28px;border-radius:8px}
+.chiplink{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--chip);color:var(--ink);text-decoration:none;font-weight:700}
+.hero{padding:34px;margin-bottom:22px}
+.eyebrow{display:inline-block;margin-bottom:12px;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.04em;background:#e6f0ec;color:var(--brand)}
+h1,h2,h3,p{margin-top:0}
+h1{margin-bottom:12px;font-size:40px;line-height:1.2}
+h2{margin-bottom:12px;font-size:24px}
+h3{margin-bottom:10px;font-size:22px;line-height:1.3}
+.lead{max-width:840px;color:var(--muted);font-size:18px}
+.hero-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:22px}
+.hero-stat{padding:16px 18px;border-radius:18px;border:1px solid var(--line);background:rgba(255,252,246,.72)}
+.hero-stat strong{display:block;margin-bottom:4px;font-size:24px}
+.layout{display:grid;grid-template-columns:320px minmax(0,1fr);gap:20px;align-items:start}
+.panel{padding:24px;position:sticky;top:20px}
+.group{margin-bottom:22px}
+.label{display:block;margin-bottom:10px;color:var(--muted);font-size:14px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.input,.select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fffdf9;color:var(--ink);font:inherit;transition:border-color .16s ease,box-shadow .16s ease}
+.input:focus,.select:focus{outline:none;border-color:#9fc7ba;box-shadow:0 0 0 4px rgba(20,91,75,.12)}
+.chips,.quick-filters{display:flex;flex-wrap:wrap;gap:8px}
+.quick-filters{margin-top:14px}
+.chip{border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:999px;padding:8px 12px;font:inherit;cursor:pointer;transition:background .16s ease,border-color .16s ease,color .16s ease}
+.chip:hover{border-color:#c7b9a7}
+.chip.active{background:var(--chip-active);border-color:#b7d7ca;color:var(--brand);font-weight:700}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.summary{margin-bottom:0;color:var(--muted);font-size:15px}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.spotlight{margin-bottom:18px;padding:24px;border:1px solid #d9cfbf;border-radius:24px;background:rgba(255,251,245,.86);box-shadow:0 10px 28px rgba(31,41,45,.05)}
+.spotlight[hidden]{display:none}
+.spotlight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}
+.spotlight-card{padding:18px;border-radius:20px;border:1px solid var(--line);background:#fffdf9}
+.spotlight-card h3{margin-bottom:8px;font-size:18px}
+.spotlight-card p{color:var(--muted);font-size:14px;min-height:44px}
+.card{overflow:hidden;display:flex;flex-direction:column;min-height:100%;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(31,41,45,.1);border-color:#cdbda9}
+.thumb{position:relative;min-height:132px;padding:18px;background:radial-gradient(circle at top right,rgba(255,255,255,.38) 0,transparent 28%),linear-gradient(135deg,#155d4b 0%,#c96d2d 100%);color:#fff;display:flex;flex-direction:column;gap:6px;justify-content:flex-end}
+.thumb.has-image::before{content:"";position:absolute;inset:0;background-image:var(--thumb-image);background-size:cover;background-position:center}
+.thumb.has-image::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.10) 0%,rgba(0,0,0,.34) 100%)}
+.thumb small,.thumb strong{position:relative;z-index:1}
+.thumb small{display:block;padding-bottom:2px;opacity:.9;letter-spacing:.04em;text-transform:uppercase;font-size:12px}
+.thumb strong{display:block;max-width:80%;font-size:24px;line-height:1.15}
+.card-body{padding:22px}
+.meta,.tagline{display:flex;flex-wrap:wrap;gap:8px}
+.meta{margin-bottom:14px}
+.tagline{margin-top:16px}
+.pill,.tag{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:13px}
+.pill{background:#f1ebe0;color:#334044}
+.tag{background:#f8f3ea;border:1px solid #e6dac8}
+.status-draft{background:var(--status-draft);color:var(--status-draft-ink);font-weight:700}
+.status-review{background:var(--status-review);color:var(--status-review-ink);font-weight:700}
+.status-published{background:var(--status-published);color:var(--status-published-ink);font-weight:700}
+.priority{background:#e5f1ec;color:var(--brand);font-weight:700}
+.recommended{background:#f8eadf;color:#c96d2d;font-weight:700}
+.seriesline{margin-bottom:10px;color:var(--brand);font-size:14px;font-weight:700}
+.desc{min-height:52px;color:var(--muted)}
+.keyword{margin-top:14px;padding:12px 14px;border-radius:14px;background:#f6efe5;border:1px solid #e8dbc9;font-size:14px;color:#38464a}
+.link{display:inline-block;margin-top:18px;color:var(--brand);font-weight:700;text-decoration:none;text-underline-offset:3px}
+.chiplink:hover,.link:hover{text-decoration:underline}
+.empty{padding:28px;border-radius:20px;border:1px dashed var(--line);background:rgba(255,252,246,.7);color:var(--muted)}
+.footer,.sitefoot{margin-top:18px;color:var(--muted)}
+.sitefoot{font-size:13px}
+@media (max-width:920px){.layout{grid-template-columns:1fr}.panel{position:static}}
+@media (max-width:640px){.topnav{justify-content:flex-start}}
+  </style>
+    <script type="application/json" id="content-index-data">[{"file":"01-doctor-ai-series-landing.html","title":"의사가 배우는 AI 시리즈 소개","content_type":"series","series":"의사가 배우는 AI","series_order":0,"status":"published","publish_priority":1,"recommended_order":1,"primary_keyword":"의사가 배우는 AI","thumbnail_label":"Series","thumbnail_image":"./thumbnails/series.svg","difficulty":"beginner","topic_groups":["ai literacy","clinical workflow","medical education","research"],"keywords":["의사가 배우는 AI","의료 AI 교육","AI 리터러시","임상 워크플로우","전공의 교육"],"hashtags":["#의사가배우는AI","#의료AI","#SReborn"],"seo_description":"의사를 위한 AI 교육 시리즈의 목적, 독자, 읽는 순서, 핵심 주제를 한 페이지에서 정리한 랜딩 페이지."},{"file":"11-doctors-learning-ai-intro.html","title":"의사가 AI를 배워야 하는 이유","content_type":"article","series":"의사가 배우는 AI","series_order":1,"status":"published","publish_priority":1,"recommended_order":2,"primary_keyword":"의사가 배우는 AI","thumbnail_label":"Intro","thumbnail_image":"./thumbnails/intro.svg","difficulty":"beginner","topic_groups":["ai literacy","clinical workflow","medical education"],"keywords":["의사가 배우는 AI","의료 AI 교육","생성형 AI","임상 생산성","의사 업무 효율","의료 디지털 전환"],"hashtags":["#의사가배우는AI","#의료AI","#생성형AI","#디지털헬스","#임상생산성","#SReborn"],"seo_description":"의사가 AI를 배워야 하는 이유를 임상 업무, 교육, 연구, 환자 커뮤니케이션 관점에서 정리한 입문 글."},{"file":"12-ai-strengths-and-limits.html","title":"AI가 잘하는 일과 못하는 일","content_type":"article","series":"의사가 배우는 AI","series_order":2,"status":"published","publish_priority":1,"recommended_order":3,"primary_keyword":"AI 리터러시","thumbnail_label":"Limits","thumbnail_image":"./thumbnails/limits.svg","difficulty":"beginner","topic_groups":["ai literacy","ethics","clinical workflow"],"keywords":["AI 리터러시","의료 AI 한계","환각","검증","생성형 AI"],"hashtags":["#의사가배우는AI","#의료AI","#AI리터러시","#생성형AI","#SReborn"],"seo_description":"의료 현장에서 AI가 잘하는 업무와 위험한 사용 장면을 구분해 설명하는 입문 글."},{"file":"00-content-strategy.html","title":"S-Reborn 의사용 AI 교육 콘텐츠 기획서","content_type":"planning","series":"","series_order":null,"status":"published","publish_priority":1,"recommended_order":null,"primary_keyword":"의사가 배우는 AI","thumbnail_label":"Strategy","thumbnail_image":"","difficulty":"","topic_groups":["ai literacy","clinical workflow","ethics","documentation","education series"],"keywords":["의사가 배우는 AI","의료 AI 교육","임상 워크플로우","생성형 AI","AI 리터러시","S-Reborn"],"hashtags":["#의사가배우는AI","#의료AI","#생성형AI","#디지털헬스","#SReborn"],"seo_description":""},{"file":"13-ai-in-outpatient-workflow.html","title":"외래 전후에 AI를 쓰는 5가지 장면","content_type":"article","series":"의사가 배우는 AI","series_order":3,"status":"published","publish_priority":2,"recommended_order":4,"primary_keyword":"임상 워크플로우","thumbnail_label":"Workflow","thumbnail_image":"./thumbnails/workflow.svg","difficulty":"beginner","topic_groups":["clinical workflow","documentation","patient communication"],"keywords":["임상 워크플로우","외래 AI","환자 설명","문서 초안","의사 업무 효율"],"hashtags":["#의사가배우는AI","#의료AI","#임상생산성","#환자설명","#SReborn"],"seo_description":"외래 전후에 의사가 AI를 보조적으로 활용할 수 있는 실제 업무 장면 다섯 가지를 정리한 글."},{"file":"14-safe-medical-prompting.html","title":"의료 현장에서 안전하게 프롬프트 쓰는 법","content_type":"article","series":"의사가 배우는 AI","series_order":4,"status":"published","publish_priority":2,"recommended_order":5,"primary_keyword":"프롬프트 작성","thumbnail_label":"Prompt","thumbnail_image":"./thumbnails/prompt.svg","difficulty":"intermediate","topic_groups":["clinical workflow","ethics","documentation"],"keywords":["프롬프트 작성","의료 AI 보안","검증","문서 자동화","환각 방지"],"hashtags":["#의사가배우는AI","#의료AI","#프롬프트","#AI리터러시","#SReborn"],"seo_description":"의료 현장에서 생성형 AI 프롬프트를 작성할 때 지켜야 할 안전 기준과 실전 문장 구조를 소개하는 글."},{"file":"15-ai-for-resident-education-and-research.html","title":"전공의 교육과 연구에 AI를 붙이는 방법","content_type":"article","series":"의사가 배우는 AI","series_order":5,"status":"published","publish_priority":3,"recommended_order":6,"primary_keyword":"전공의 교육","thumbnail_label":"Education","thumbnail_image":"./thumbnails/education.svg","difficulty":"intermediate","topic_groups":["medical education","research","ai literacy"],"keywords":["전공의 교육","연구 보조","논문 요약","강의 자료","학습 설계"],"hashtags":["#의사가배우는AI","#전공의교육","#의료AI","#논문요약","#SReborn"],"seo_description":"전공의 교육, 강의 준비, 논문 읽기, 연구 아이디어 정리에 AI를 보조적으로 활용하는 방법을 정리한 글."},{"file":"10-article-template.html","title":"의사용 AI 교육 글 템플릿","content_type":"template","series":"","series_order":null,"status":"review","publish_priority":4,"recommended_order":null,"primary_keyword":"의사가 배우는 AI","thumbnail_label":"Template","thumbnail_image":"","difficulty":"beginner","topic_groups":["ai literacy"],"keywords":["의사가 배우는 AI","의료 AI 교육"],"hashtags":["#의사가배우는AI","#의료AI","#SReborn"],"seo_description":""}]</script>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="topnav">
+        <a class="brandmark" href="./home.html">
+          <img src="./assets/s-reborn-logo.svg" alt="S-Reborn 로고" />
+          S-Reborn
+        </a>
+        <a class="chiplink" href="./home.html">
+          공개 홈
+        </a>
+      </div>
+      <section class="hero">
+        <div class="eyebrow">
+          S-REBORN CONTENT INDEX
+        </div>
+        <h1>
+          의사용 AI 교육 HTML 인덱스
+        </h1>
+        <p class="lead">
+          이 페이지는 같은 폴더 안의 HTML 문서를 메타데이터 기준으로 분류해 보여주는 내부 인덱스입니다. 콘텐츠 타입, 상태, 난이도, 주제별로 빠르게 찾을 수 있습니다.
+        </p>
+        <div class="hero-grid">
+          <div class="hero-stat">
+            <strong id="statTotal">
+              0
+            </strong>
+            <span>
+              전체 문서
+            </span>
+          </div>
+          <div class="hero-stat">
+            <strong id="statSeries">
+              0
+            </strong>
+            <span>
+              시리즈 문서
+            </span>
+          </div>
+          <div class="hero-stat">
+            <strong id="statPriority">
+              0
+            </strong>
+            <span>
+              우선 발행 대상
+            </span>
+          </div>
+        </div>
+      </section>
+      <div class="layout">
+        <aside class="panel">
+          <div class="group">
+            <label class="label" for="searchInput">
+              검색
+            </label>
+            <input id="searchInput" class="input" type="search" placeholder="제목, 키워드, 해시태그 검색" />
+          </div>
+          <div class="group">
+            <label class="label" for="typeFilter">
+              콘텐츠 타입
+            </label>
+            <select id="typeFilter" class="select">
+              <option value="">
+                전체
+              </option>
+            </select>
+          </div>
+          <div class="group">
+            <label class="label" for="statusFilter">
+              상태
+            </label>
+            <select id="statusFilter" class="select">
+              <option value="">
+                전체
+              </option>
+            </select>
+          </div>
+          <div class="group">
+            <label class="label" for="difficultyFilter">
+              난이도
+            </label>
+            <select id="difficultyFilter" class="select">
+              <option value="">
+                전체
+              </option>
+            </select>
+          </div>
+          <div class="group">
+            <span class="label">
+              주제 그룹
+            </span>
+            <div id="topicChips" class="chips">
+            </div>
+          </div>
+        </aside>
+        <section>
+          <section id="reviewSpotlight" class="spotlight" hidden>
+            <div class="eyebrow">
+              REVIEW QUEUE
+            </div>
+            <h2>
+              지금 검토하면 좋은 문서
+            </h2>
+            <p class="summary">
+              상태가
+              <code>
+                review
+              </code>
+              인 문서를 우선 표시합니다.
+            </p>
+            <div id="reviewSpotlightGrid" class="spotlight-grid">
+            </div>
+          </section>
+          <div class="toolbar">
+            <p id="summary" class="summary">
+            </p>
+          </div>
+          <div id="quickFilters" class="quick-filters">
+          </div>
+          <div id="results" class="results">
+          </div>
+          <div id="emptyState" class="empty" hidden>
+            조건에 맞는 문서가 없습니다. 필터를 줄이거나 검색어를 바꿔보세요.
+          </div>
+          <p class="footer">
+            새 문서를 추가한 뒤에는
+            <code>
+              .\scripts\build-s-reborn-index.ps1
+            </code>
+            를 다시 실행하면 인덱스가 갱신됩니다.
+          </p>
+          <p class="sitefoot">
+            Copyright 2026 S-REBORN. 문의 및 운영 조정은 내부 콘텐츠 관리자 기준에 따라 진행합니다.
+          </p>
+        </section>
+      </div>
+    </div>
+    <script>
+    const items = JSON.parse(document.getElementById("content-index-data").textContent).map((item)=>({...item,topic_groups:item.topic_groups||[],keywords:item.keywords||[],hashtags:item.hashtags||[]}));
+    const searchInput=document.getElementById("searchInput"), typeFilter=document.getElementById("typeFilter"), statusFilter=document.getElementById("statusFilter"), difficultyFilter=document.getElementById("difficultyFilter"), topicChips=document.getElementById("topicChips"), summary=document.getElementById("summary"), results=document.getElementById("results"), emptyState=document.getElementById("emptyState"), reviewSpotlight=document.getElementById("reviewSpotlight"), reviewSpotlightGrid=document.getElementById("reviewSpotlightGrid"), statTotal=document.getElementById("statTotal"), statSeries=document.getElementById("statSeries"), statPriority=document.getElementById("statPriority");
+    let activeTopic="", activeQuickStatus="";
+    function e(v){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;")}
+    function vals(key){return [...new Set(items.flatMap((item)=>Array.isArray(item[key])?item[key]:[item[key]]).filter(Boolean))].sort()}
+    function fill(select,list){list.forEach((value)=>{const option=document.createElement("option"); option.value=value; option.textContent=value; select.appendChild(option);})}
+    function renderTopics(){const topics=vals("topic_groups"); topicChips.innerHTML=""; const all=document.createElement("button"); all.type="button"; all.className="chip"+(activeTopic===""?" active":""); all.textContent="전체"; all.onclick=()=>{activeTopic=""; renderTopics(); render();}; topicChips.appendChild(all); topics.forEach((topic)=>{const button=document.createElement("button"); button.type="button"; button.className="chip"+(activeTopic===topic?" active":""); button.textContent=topic; button.onclick=()=>{activeTopic=activeTopic===topic?"":topic; renderTopics(); render();}; topicChips.appendChild(button);});}
+    function renderQuick(){const wrap=document.getElementById("quickFilters"), labels={"":"전체 상태","draft":"draft만","review":"review만","published":"published만"}; wrap.innerHTML=""; Object.keys(labels).forEach((status)=>{const button=document.createElement("button"); button.type="button"; button.className="chip"+(activeQuickStatus===status?" active":""); button.textContent=labels[status]; button.onclick=()=>{activeQuickStatus=status; statusFilter.value=status; renderQuick(); render();}; wrap.appendChild(button);});}
+    function statusClass(status){const key=String(status||"").toLowerCase(); return ["draft","review","published"].includes(key)?"status-"+key:""}
+    function matches(item,query){if(!query)return true; const text=[item.title,item.content_type,item.series,item.status,item.difficulty,...item.topic_groups,...item.keywords,...item.hashtags].filter(Boolean).join(" ").toLowerCase(); return text.includes(query)}
+    function label(item){if(item.thumbnail_label)return item.thumbnail_label; if(item.series_order!==null&&item.series_order!==undefined)return String(item.series_order).padStart(2,"0"); return "DOC"}
+    function filtered(){const q=searchInput.value.trim().toLowerCase(); return items.filter((item)=>{if(typeFilter.value&&item.content_type!==typeFilter.value)return false; if(statusFilter.value&&item.status!==statusFilter.value)return false; if(difficultyFilter.value&&item.difficulty!==difficultyFilter.value)return false; if(activeTopic&&!item.topic_groups.includes(activeTopic))return false; return matches(item,q);})}
+    function card(item){const desc=item.seo_description||"설명이 아직 없는 문서입니다."; const pills=[]; if(item.recommended_order)pills.push('<span class="pill recommended">추천 순서 '+e(item.recommended_order)+'</span>'); if(item.publish_priority)pills.push('<span class="pill priority">발행 우선 P'+e(item.publish_priority)+'</span>'); if(item.status)pills.push('<span class="pill '+statusClass(item.status)+'">'+e(item.status)+'</span>'); if(item.content_type)pills.push('<span class="pill">'+e(item.content_type)+'</span>'); if(item.difficulty)pills.push('<span class="pill">'+e(item.difficulty)+'</span>'); const tags=[...item.topic_groups,...item.keywords.slice(0,3)].slice(0,6).map((value)=>'<span class="tag">'+e(value)+'</span>').join(''); const keyword=item.primary_keyword?'<div class="keyword">대표 키워드: <strong>'+e(item.primary_keyword)+'</strong></div>':''; const thumbClass=item.thumbnail_image?'thumb has-image':'thumb'; const thumbStyle=item.thumbnail_image?' style="--thumb-image: url(&quot;'+encodeURI(item.thumbnail_image)+'&quot;);"':''; const seriesLine=item.series?'<p class="seriesline">'+e(item.series)+(item.series_order?' · '+e(item.series_order+'편'):'')+'</p>':''; return '<article class="card"><div class="'+thumbClass+'"'+thumbStyle+'><small>'+e(item.content_type||'document')+'</small><strong>'+e(label(item))+'</strong></div><div class="card-body"><div class="meta">'+pills.join('')+'</div>'+seriesLine+'<h3>'+e(item.title||item.file)+'</h3><p class="desc">'+e(desc)+'</p>'+keyword+'<div class="tagline">'+tags+'</div><a class="link" href="./'+encodeURI(item.file)+'">문서 열기</a></div></article>'}
+    function reviewCard(item){const desc=item.seo_description||"설명이 아직 없는 문서입니다."; const order=item.recommended_order?"추천 순서 "+item.recommended_order:"검토 대상"; return '<article class="spotlight-card"><div class="meta"><span class="pill recommended">'+e(order)+'</span><span class="pill status-review">review</span></div><h3>'+e(item.title||item.file)+'</h3><p>'+e(desc)+'</p><a class="link" href="./'+encodeURI(item.file)+'">문서 열기</a></article>'}
+    function render(){const list=filtered(); const reviewItems=items.filter((item)=>item.status==='review').slice(0,4); summary.textContent='총 '+list.length+'개 문서 / 전체 '+items.length+'개'; results.innerHTML=list.map(card).join(''); emptyState.hidden=list.length!==0; reviewSpotlight.hidden=reviewItems.length===0; reviewSpotlightGrid.innerHTML=reviewItems.map(reviewCard).join(''); statTotal.textContent=String(items.length); statSeries.textContent=String(items.filter((item)=>item.series).length); statPriority.textContent=String(items.filter((item)=>Number(item.publish_priority)<=2).length)}
+    fill(typeFilter,vals('content_type')); fill(statusFilter,vals('status')); fill(difficultyFilter,vals('difficulty')); renderTopics(); renderQuick(); render(); [searchInput,typeFilter,statusFilter,difficultyFilter].forEach((node)=>{node.addEventListener('input',render); node.addEventListener('change',()=>{if(node===statusFilter){activeQuickStatus=statusFilter.value; renderQuick();} render();});});
+  </script>
+  </body>
+</html>

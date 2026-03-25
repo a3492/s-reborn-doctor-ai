@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <clipPath id="rbox">
+      <rect width="100" height="100" rx="22"/>
+    </clipPath>
+    <linearGradient id="left3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b87872"/>
+      <stop offset="100%" stop-color="#7a4035"/>
+    </linearGradient>
+  </defs>
+  <!-- Right side: ivory -->
+  <rect width="100" height="100" rx="22" fill="#faf0e6"/>
+  <!-- Left side: rosewood gradient (clipped) -->
+  <rect width="51" height="100" fill="url(#left3)" clip-path="url(#rbox)"/>
+  <!-- Gold divider -->
+  <line x1="51" y1="12" x2="51" y2="88" stroke="#c9a07a" stroke-width="1" opacity="0.55" clip-path="url(#rbox)"/>
+  <!-- "S" ivory on rose -->
+  <text
+    x="26" y="68"
+    font-family="Georgia, 'Palatino Linotype', Palatino, serif"
+    font-size="50"
+    font-weight="700"
+    font-style="italic"
+    fill="#fdf5ee"
+    text-anchor="middle">S</text>
+  <!-- "W" rosewood on ivory -->
+  <text
+    x="75" y="68"
+    font-family="Georgia, 'Palatino Linotype', Palatino, serif"
+    font-size="50"
+    font-weight="700"
+    font-style="italic"
+    fill="#7a4035"
+    text-anchor="middle">W</text>
+</svg>

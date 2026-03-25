@@ -1,0 +1,16 @@
+# 로컬 기획 문서 (공개 불필요)
+_planning/
+
+# 에러 로그
+ERROR DB/
+
+# 버그 리포트
+*.docx
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
