@@ -1,0 +1,45 @@
+name: Sync doctor-ai → s-reborn-blog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'doctor-ai/**'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    name: Copy doctor-ai to blog public/
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout doctor-ai repo
+        uses: actions/checkout@v4
+        with:
+          path: doctor-ai-src
+
+      - name: Checkout s-reborn-blog repo
+        uses: actions/checkout@v4
+        with:
+          repository: a3492/s-reborn-blog
+          token: ${{ secrets.BLOG_SYNC_TOKEN }}
+          path: blog-dst
+
+      - name: Sync doctor-ai files
+        run: |
+          rm -rf blog-dst/public/doctor-ai
+          cp -r doctor-ai-src/doctor-ai blog-dst/public/doctor-ai
+          echo "동기화 완료: $(find blog-dst/public/doctor-ai -type f | wc -l)개 파일"
+
+      - name: Commit and push if changed
+        run: |
+          cd blog-dst
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/doctor-ai
+          if git diff --cached --quiet; then
+            echo "변경 없음 — 커밋 생략"
+          else
+            git commit -m "sync: doctor-ai updated from s-reborn-doctor-ai"
+            git push
+          fi
