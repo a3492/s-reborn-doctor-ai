@@ -3,283 +3,645 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI가 잘하는 일과 못하는 일</title>
-  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
-  <link rel="apple-touch-icon" href="./assets/s-reborn-logo.svg" />
-  <meta name="description" content="의료 현장에서 AI가 잘하는 업무와 위험한 사용 장면을 구분해 설명하는 입문 글." />
-  <link rel="canonical" href="./12-ai-strengths-and-limits.html" />
-  <meta name="thumbnail_alt" content="AI가 잘하는 일과 못하는 일을 비교하는 대표 이미지" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="AI가 잘하는 일과 못하는 일 | S-Reborn" />
-  <meta property="og:description" content="의료 현장에서 AI가 잘하는 업무와 위험한 사용 장면을 구분해 설명하는 입문 글." />
-  <meta property="og:image" content="./thumbnails/limits.svg" />
-  <meta property="og:image:alt" content="AI가 잘하는 일과 못하는 일을 비교하는 대표 이미지" />
-  <meta property="og:locale" content="ko_KR" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AI가 잘하는 일과 못하는 일 | S-Reborn" />
-  <meta name="twitter:description" content="의료 현장에서 AI가 잘하는 업무와 위험한 사용 장면을 구분해 설명하는 입문 글." />
-  <meta name="twitter:image" content="./thumbnails/limits.svg" />
-  <meta name="twitter:image:alt" content="AI가 잘하는 일과 못하는 일을 비교하는 대표 이미지" />
-  <script type="application/json" class="frontmatter">
-    {
-      "content_id": "doctor-ai-002",
-      "title": "AI가 잘하는 일과 못하는 일",
-      "slug": "what-ai-does-well-and-poorly-in-medicine",
-      "content_type": "article",
-      "series": "의사가 배우는 AI",
-      "series_order": 2,
-      "status": "published",
-      "publish_priority": 1,
-      "recommended_order": 3,
-      "primary_keyword": "AI 리터러시",
-      "thumbnail_label": "Limits",
-      "thumbnail_image": "./thumbnails/limits.svg",
-      "thumbnail_alt": "AI가 잘하는 일과 못하는 일을 비교하는 대표 이미지",
-      "audience": ["resident", "fellow", "specialist", "clinic director"],
-      "difficulty": "beginner",
-      "specialty": ["common"],
-      "topic_groups": ["ai literacy", "ethics", "clinical workflow"],
-      "keywords": ["AI 리터러시", "의료 AI 한계", "환각", "검증", "생성형 AI"],
-      "hashtags": ["#의사가배우는AI", "#의료AI", "#AI리터러시", "#생성형AI", "#SReborn"],
-      "seo_title": "AI가 잘하는 일과 못하는 일 | S-Reborn",
-      "seo_description": "의료 현장에서 AI가 잘하는 업무와 위험한 사용 장면을 구분해 설명하는 입문 글.",
-      "cta": "다음 편에서는 외래 전후에 AI를 붙일 수 있는 구체적인 업무 장면을 정리합니다.",
-      "updated_at": "2026-03-23",
-      "owner": "codex"
-    }
-  </script>
+  <title>2편 — AI의 강점과 한계 | 의사를 위한 AI</title>
   <style>
     :root {
-      --bg: #fbf7f1;
-      --ink: #1d2328;
-      --muted: #5f6870;
-      --brand: #155d4b;
-      --line: #ddd4c6;
-      --card: #fffdf9;
-      --accent: #bf5f2f;
+      --brand:#155d4b; --brand-d:#0d3d30; --brand-l:#e8f4ef;
+      --bg:#f5f1eb; --surface:#fffcf7; --ink:#18212a; --muted:#4a5562;
+      --rule:#ddd8d0; --warn:#b45309; --danger:#dc2626; --ok:#15803d;
+      --r:12px; --r-sm:8px;
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background:
-        radial-gradient(circle at left top, #f3ead8 0, transparent 20%),
-        linear-gradient(180deg, #fbf7f1 0%, #f4ede2 100%);
-      color: var(--ink);
-      font-family: "Segoe UI", "Malgun Gothic", sans-serif;
-      line-height: 1.75;
-    }
-    .page { max-width: 860px; margin: 0 auto; padding: 56px 20px 88px; }
-    .topnav {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .brandmark {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--ink);
-      text-decoration: none;
-      font-weight: 700;
-    }
-    .brandmark img {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-    }
-    .hero, .box {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      box-shadow: 0 12px 34px rgba(29, 35, 40, 0.06);
-    }
-    .hero { padding: 36px; }
-    .box { margin-top: 20px; padding: 28px; }
-    .label {
-      display: inline-block;
-      margin-bottom: 14px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: #e9f2ee;
-      color: var(--brand);
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.04em;
-    }
-    h1, h2 { line-height: 1.28; margin: 0 0 14px; }
-    h1 { font-size: 38px; }
-    h2 { font-size: 28px; }
-    p { margin: 0 0 14px; }
-    .lead { font-size: 19px; color: var(--muted); }
-    ul, ol { margin: 0; padding-left: 22px; }
-    li { margin-bottom: 10px; }
-    .prompt {
-      background: #f5efe6;
-      border-radius: 16px;
-      padding: 18px;
-      border: 1px solid #e6d8c8;
-      white-space: pre-wrap;
-      font-family: Consolas, monospace;
-      font-size: 14px;
-    }
-    .warn {
-      padding: 16px 18px;
-      border-left: 4px solid var(--accent);
-      background: #fbf1ea;
-      border-radius: 14px;
-    }
-    .meta { color: var(--muted); font-size: 14px; }
-    .takeaway {
-      margin-top: 20px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      background: #eef4ef;
-      border: 1px solid #d6e3da;
-    }
-    .takeaway strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--brand);
-    }
-    .series-nav {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 22px;
-      flex-wrap: wrap;
-    }
-    .series-link {
-      color: var(--brand);
-      font-weight: 700;
-      text-decoration: none;
-    }
-    /* ── 시리즈 네비게이션 공통 ── */
-    .breadcrumb{font-size:13px;color:var(--muted);margin-bottom:12px}
-    .breadcrumb a{color:var(--muted);text-decoration:none}
-    .breadcrumb a:hover{color:var(--brand);text-decoration:underline}
-    .series-progress{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:20px;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px}
-    .sp-label{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.04em;margin-right:4px;white-space:nowrap}
-    .sp-step{display:inline-flex;align-items:center;justify-content:center;padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;color:var(--muted);border:1px solid var(--line);transition:border-color .15s,color .15s;white-space:nowrap}
-    .sp-step:hover{border-color:var(--brand);color:var(--brand)}
-    .sp-step.on{background:var(--brand);color:#fff;border-color:var(--brand)}
-    .nav-duo{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;margin-top:24px;align-items:stretch}
-    .nav-block{display:flex;flex-direction:column;gap:3px;padding:14px 18px;background:var(--card);border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink);transition:border-color .15s,box-shadow .15s}
-    .nav-block:hover{border-color:var(--brand);box-shadow:0 4px 14px rgba(21,93,75,.09)}
-    .nav-dir{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-    .nav-title{font-size:14px;font-weight:700;color:var(--brand);line-height:1.3}
-    .nav-r{text-align:right}
-    .nav-home{display:inline-flex;align-items:center;justify-content:center;padding:0 16px;min-width:56px;background:#f0ebe2;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--muted);font-size:13px;font-weight:700;white-space:nowrap}
-    .nav-home:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
-    @media(max-width:600px){.nav-duo{grid-template-columns:1fr}.nav-r{text-align:left}.nav-home{padding:14px}}
-    .sitefoot {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 13px;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Pretendard','Apple SD Gothic Neo',system-ui,sans-serif;
+      background:var(--bg);color:var(--ink);font-size:18px;line-height:1.75}
+
+    /* progress bar */
+    #pbar{position:fixed;top:0;left:0;height:3px;background:var(--brand);width:0%;z-index:200;transition:width .1s}
+
+    /* nav */
+    nav{position:sticky;top:0;z-index:100;background:rgba(255,252,247,.92);
+      backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.75rem 1.5rem;gap:1rem}
+    .nav-series{font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.4px}
+    .nav-title{font-size:14px;font-weight:700;color:var(--ink)}
+    .nav-ep{font-size:13px;font-weight:700;color:var(--brand);
+      background:var(--brand-l);padding:.2rem .6rem;border-radius:20px}
+
+    /* series progress */
+    .series-bar{background:var(--surface);border-bottom:1px solid var(--rule);
+      padding:.6rem 1.5rem;display:flex;align-items:center;gap:.5rem;overflow-x:auto}
+    .sp-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;
+      justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;
+      text-decoration:none;transition:transform .15s}
+    .sp-dot:hover{transform:scale(1.15)}
+    .sp-dot.done{background:var(--brand);color:#fff}
+    .sp-dot.active{background:var(--brand-d);color:#fff;box-shadow:0 0 0 3px var(--brand-l)}
+    .sp-dot.todo{background:var(--rule);color:var(--muted)}
+    .sp-line{flex:1;height:2px;background:var(--rule);min-width:8px;flex-shrink:0}
+    .sp-line.done{background:var(--brand)}
+
+    /* hero */
+    .hero{background:linear-gradient(135deg,var(--brand-d) 0%,var(--brand) 100%);
+      color:#fff;padding:4rem 1.5rem 3rem;text-align:center}
+    .hero-ep{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+      opacity:.7;margin-bottom:.75rem}
+    .hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.2;
+      margin-bottom:1rem}
+    .hero-sub{font-size:1rem;opacity:.8;max-width:540px;margin:0 auto 1.5rem}
+    .hero-tags{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+    .hero-tag{font-size:12px;font-weight:700;background:rgba(255,255,255,.18);
+      padding:.25rem .75rem;border-radius:20px}
+
+    /* layout */
+    .container{max-width:780px;margin:0 auto;padding:0 1.5rem}
+    section{padding:3rem 0}
+    section+section{border-top:1px solid var(--rule)}
+
+    /* section head */
+    .sec-label{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+      color:var(--brand);margin-bottom:.5rem}
+    h2{font-size:clamp(1.5rem,3vw,1.875rem);font-weight:900;line-height:1.25;
+      margin-bottom:1rem;color:var(--ink)}
+    h3{font-size:1.25rem;font-weight:800;margin-bottom:.625rem;color:var(--ink)}
+    p{margin-bottom:1rem;color:var(--muted)}
+    p:last-child{margin-bottom:0}
+
+    /* callout */
+    .callout{background:var(--brand-l);border-left:4px solid var(--brand);
+      border-radius:0 var(--r-sm) var(--r-sm) 0;padding:1.125rem 1.25rem;
+      margin:1.5rem 0;font-size:.95rem;color:var(--ink)}
+
+    /* fade in */
+    .fade{opacity:0;transform:translateY(22px);transition:opacity .55s,transform .55s}
+    .fade.visible{opacity:1;transform:none}
+
+    /* ---- COMP: SW Grid ---- */
+    .sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+    .sw-col{border-radius:var(--r);overflow:hidden}
+    .sw-col-head{padding:.75rem 1rem;font-size:13px;font-weight:800;
+      letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:.5rem}
+    .sw-col.good .sw-col-head{background:#15803d;color:#fff}
+    .sw-col.bad .sw-col-head{background:#dc2626;color:#fff}
+    .sw-col-body{border:2px solid;border-top:0;border-radius:0 0 var(--r) var(--r);padding:.75rem}
+    .sw-col.good .sw-col-body{border-color:#15803d;background:#f0fdf4}
+    .sw-col.bad .sw-col-body{border-color:#dc2626;background:#fef2f2}
+    .sw-item{display:flex;align-items:flex-start;gap:.5rem;
+      font-size:.9rem;padding:.375rem 0;border-bottom:1px solid rgba(0,0,0,.07);line-height:1.5}
+    .sw-item:last-child{border-bottom:none}
+    .sw-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem}
+
+    /* ---- COMP: Concept Accordion ---- */
+    .concept-list{display:flex;flex-direction:column;gap:.75rem;margin:1.5rem 0}
+    .concept-item{border:2px solid var(--rule);border-radius:var(--r);overflow:hidden;
+      transition:border-color .2s}
+    .concept-item.open{border-color:var(--brand)}
+    .concept-btn{width:100%;background:none;border:none;padding:1rem 1.25rem;
+      display:flex;align-items:center;gap:.875rem;cursor:pointer;text-align:left}
+    .concept-icon{width:40px;height:40px;border-radius:10px;display:flex;
+      align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
+    .concept-title{font-size:1rem;font-weight:800;color:var(--ink);flex:1}
+    .concept-badge{font-size:11px;font-weight:700;padding:.2rem .5rem;
+      border-radius:20px;background:var(--brand-l);color:var(--brand)}
+    .concept-arrow{font-size:.75rem;color:var(--muted);transition:transform .25s}
+    .concept-item.open .concept-arrow{transform:rotate(180deg)}
+    .concept-body{display:none;padding:0 1.25rem 1.25rem;padding-top:0}
+    .concept-item.open .concept-body{display:block}
+    .concept-body p{font-size:.9rem;margin-bottom:.75rem}
+    .concept-example{background:var(--bg);border-radius:var(--r-sm);
+      padding:.875rem 1rem;font-size:.875rem;border-left:3px solid var(--warn)}
+    .concept-example strong{color:var(--warn)}
+
+    /* ---- COMP: Scenario Game ---- */
+    .game-wrap{margin:1.5rem 0}
+    .game-score-bar{display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:1rem;padding:.75rem 1rem;background:var(--surface);
+      border-radius:var(--r-sm);border:1px solid var(--rule)}
+    .game-score-label{font-size:13px;font-weight:700;color:var(--muted)}
+    .game-score-val{font-size:1.25rem;font-weight:900;color:var(--brand)}
+    .scenario-card{background:var(--surface);border:2px solid var(--rule);
+      border-radius:var(--r);padding:1.5rem;margin-bottom:.875rem;
+      transition:border-color .2s,background .2s}
+    .scenario-card.correct{border-color:var(--ok);background:#f0fdf4}
+    .scenario-card.wrong{border-color:var(--danger);background:#fef2f2}
+    .scenario-num{font-size:12px;font-weight:800;color:var(--brand);
+      letter-spacing:.5px;text-transform:uppercase;margin-bottom:.5rem}
+    .scenario-q{font-size:1rem;font-weight:700;color:var(--ink);
+      line-height:1.5;margin-bottom:1rem}
+    .scenario-btns{display:flex;gap:.625rem;flex-wrap:wrap}
+    .scenario-btn{padding:.625rem 1.25rem;border-radius:var(--r-sm);border:2px solid;
+      font-size:.875rem;font-weight:700;cursor:pointer;transition:.15s;background:none}
+    .scenario-btn.ai{border-color:var(--brand);color:var(--brand)}
+    .scenario-btn.ai:hover{background:var(--brand-l)}
+    .scenario-btn.doc{border-color:#7c3aed;color:#7c3aed}
+    .scenario-btn.doc:hover{background:#f5f3ff}
+    .scenario-btn.both{border-color:var(--warn);color:var(--warn)}
+    .scenario-btn.both:hover{background:#fffbeb}
+    .scenario-result{display:none;margin-top:.875rem;padding:.75rem 1rem;
+      border-radius:var(--r-sm);font-size:.9rem;line-height:1.5}
+    .scenario-card.correct .scenario-result{display:block;background:#dcfce7;color:#166534}
+    .scenario-card.wrong .scenario-result{display:block;background:#fee2e2;color:#991b1b}
+    .game-final{text-align:center;padding:1.5rem;background:var(--brand-l);
+      border-radius:var(--r);display:none;margin-top:.5rem}
+    .game-final-score{font-size:2.5rem;font-weight:900;color:var(--brand)}
+    .game-final-msg{font-size:.95rem;color:var(--brand-d);margin-top:.375rem;font-weight:600}
+
+    /* ---- COMP: Prompt Box ---- */
+    .prompt-box{background:var(--ink);color:#e2e8f0;border-radius:var(--r);
+      padding:1.25rem 1.375rem;margin:1.5rem 0;position:relative}
+    .prompt-label{font-size:11px;font-weight:800;letter-spacing:.8px;
+      text-transform:uppercase;color:#94a3b8;margin-bottom:.625rem}
+    .prompt-text{font-family:'Courier New',monospace;font-size:.875rem;
+      line-height:1.7;white-space:pre-wrap;color:#e2e8f0}
+    .copy-btn{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.2);color:#e2e8f0;
+      padding:.35rem .75rem;border-radius:6px;font-size:12px;
+      font-weight:700;cursor:pointer;transition:.15s}
+    .copy-btn:hover{background:rgba(255,255,255,.22)}
+
+    /* ---- COMP: Quiz ---- */
+    .quiz-block{background:var(--surface);border:2px solid var(--rule);
+      border-radius:var(--r);padding:1.5rem;margin:1.5rem 0}
+    .quiz-q{font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:1rem;line-height:1.5}
+    .quiz-options{display:flex;flex-direction:column;gap:.5rem}
+    .quiz-opt{padding:.75rem 1rem;border-radius:var(--r-sm);border:2px solid var(--rule);
+      background:none;cursor:pointer;text-align:left;font-size:.9rem;
+      font-weight:600;color:var(--ink);transition:.15s;width:100%}
+    .quiz-opt:hover:not(:disabled){border-color:var(--brand);background:var(--brand-l)}
+    .quiz-opt.correct{border-color:var(--ok)!important;background:#f0fdf4!important;color:var(--ok)!important}
+    .quiz-opt.wrong{border-color:var(--danger)!important;background:#fef2f2!important;color:var(--danger)!important}
+    .quiz-fb{font-size:.875rem;margin-top:.75rem;padding:.75rem 1rem;
+      border-radius:var(--r-sm);display:none;line-height:1.5}
+    .quiz-fb.show{display:block}
+    .quiz-fb.ok{background:#f0fdf4;color:#166534;border-left:3px solid var(--ok)}
+    .quiz-fb.ng{background:#fef2f2;color:#991b1b;border-left:3px solid var(--danger)}
+
+    .quiz-set{display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0}
+    .quiz-total{text-align:center;padding:1.25rem;background:var(--brand-l);
+      border-radius:var(--r);display:none;margin-top:.5rem}
+    .quiz-total.show{display:block}
+    .quiz-total-score{font-size:2rem;font-weight:900;color:var(--brand)}
+    .quiz-total-msg{font-size:.9rem;color:var(--brand-d);font-weight:600;margin-top:.25rem}
+
+    /* summary */
+    .summary{background:var(--brand-d);color:#fff;border-radius:var(--r);
+      padding:2rem 2rem;margin:1.5rem 0}
+    .summary h3{color:#fff;font-size:1.125rem;margin-bottom:1rem}
+    .summary-list{display:flex;flex-direction:column;gap:.625rem}
+    .summary-row{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;
+      line-height:1.55;opacity:.92}
+    .summary-row::before{content:"✓";color:#4ade80;font-weight:900;
+      flex-shrink:0;margin-top:.1rem}
+
+    /* nav bottom */
+    .nav-bottom{display:flex;gap:.75rem;justify-content:center;
+      flex-wrap:wrap;padding:2rem 0}
+    .nav-btn{padding:.75rem 1.5rem;border-radius:var(--r-sm);
+      font-size:.875rem;font-weight:700;text-decoration:none;
+      border:2px solid var(--rule);color:var(--muted);background:var(--surface);
+      transition:.15s}
+    .nav-btn:hover{border-color:var(--brand);color:var(--brand)}
+    .nav-btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .nav-btn.primary:hover{background:var(--brand-d);border-color:var(--brand-d)}
+
+    @media(max-width:600px){
+      .sw-grid{grid-template-columns:1fr}
+      .scenario-btns{flex-direction:column}
+      nav{padding:.625rem 1rem}
+      .hero{padding:2.5rem 1rem 2rem}
     }
   </style>
 </head>
 <body>
-  <main class="page">
-    <div class="topnav">
-      <a class="brandmark" href="./home.html"><img src="./assets/s-reborn-logo.svg" alt="S-Reborn 로고" />S-Reborn</a>
-      <a class="series-link" href="./01-doctor-ai-series-landing.html">시리즈 소개</a>
+<div id="pbar"></div>
+
+<!-- nav -->
+<nav>
+  <div>
+    <div class="nav-series">의사를 위한 AI</div>
+    <div class="nav-title">AI의 강점과 한계</div>
+  </div>
+  <span class="nav-ep">2편</span>
+</nav>
+
+<!-- series progress -->
+<div class="series-bar">
+  <a href="11-doctors-learning-ai-intro.html" class="sp-dot done" title="1편">1</a>
+  <div class="sp-line done"></div>
+  <span class="sp-dot active" title="2편">2</span>
+  <div class="sp-line"></div>
+  <a href="13-ai-in-outpatient-workflow.html" class="sp-dot todo" title="3편">3</a>
+  <div class="sp-line"></div>
+  <a href="14-safe-medical-prompting.html" class="sp-dot todo" title="4편">4</a>
+  <div class="sp-line"></div>
+  <a href="15-ai-for-resident-education-and-research.html" class="sp-dot todo" title="5편">5</a>
+  <div class="sp-line"></div>
+  <span class="sp-dot todo">6</span>
+  <div class="sp-line"></div>
+  <span class="sp-dot todo">7</span>
+  <div class="sp-line"></div>
+  <span class="sp-dot todo">8</span>
+  <div class="sp-line"></div>
+  <span class="sp-dot todo">9</span>
+  <div class="sp-line"></div>
+  <span class="sp-dot todo">10</span>
+</div>
+
+<!-- hero -->
+<div class="hero">
+  <div class="hero-ep">Episode 2</div>
+  <h1>AI는 무엇을 잘하고,<br>무엇을 못하는가?</h1>
+  <p class="hero-sub">AI를 협력자로 제대로 활용하려면, AI의 능력과 한계를 정확히 알아야 합니다.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">강점 분석</span>
+    <span class="hero-tag">환각(Hallucination)</span>
+    <span class="hero-tag">한계 이해</span>
+    <span class="hero-tag">임상 적용</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 시나리오 도입 -->
+  <section class="fade">
+    <div class="sec-label">시나리오</div>
+    <h2>퇴근 직전, 레지던트의 질문</h2>
+    <p>흉부외과 전공의 이 선생이 조심스럽게 묻습니다. <em>"교수님, AI한테 환자 진단 물어봐도 돼요? 친구가 챗GPT한테 물어봤더니 완전 틀린 답 나왔다는데…"</em></p>
+    <div class="callout">
+      이 질문의 핵심은 <strong>AI를 어디에 쓸 수 있고, 어디에 쓰면 위험한가</strong>입니다. AI를 아예 안 쓰는 것도, 무조건 믿는 것도 둘 다 위험합니다.
     </div>
-    <p class="breadcrumb"><a href="./home.html">홈</a> › <a href="./01-doctor-ai-series-landing.html">의사가 배우는 AI</a> › 2편</p>
-    <div class="series-progress">
-      <span class="sp-label">시리즈</span>
-      <a class="sp-step" href="./01-doctor-ai-series-landing.html">소개</a>
-      <a class="sp-step" href="./11-doctors-learning-ai-intro.html">1편</a>
-      <a class="sp-step on" href="./12-ai-strengths-and-limits.html">2편</a>
-      <a class="sp-step" href="./13-ai-in-outpatient-workflow.html">3편</a>
-      <a class="sp-step" href="./14-safe-medical-prompting.html">4편</a>
-      <a class="sp-step" href="./15-ai-for-resident-education-and-research.html">5편</a>
+  </section>
+
+  <!-- SW Grid -->
+  <section class="fade">
+    <div class="sec-label">핵심 개념</div>
+    <h2>AI의 강점 vs 한계</h2>
+    <p>현재 대형언어모델(LLM)이 실제로 잘하는 것과 못하는 것을 정리했습니다.</p>
+
+    <div class="sw-grid">
+      <div class="sw-col good">
+        <div class="sw-col-head">
+          <span>✅</span> 잘하는 것
+        </div>
+        <div class="sw-col-body">
+          <div class="sw-item"><span class="sw-icon">📚</span><span><strong>방대한 지식 합성</strong> — 의학 교과서, 가이드라인, 논문 내용을 빠르게 요약·비교</span></div>
+          <div class="sw-item"><span class="sw-icon">✍️</span><span><strong>문서 작성·변환</strong> — 오더, 퇴원요약, 설명문 초안을 신속하게 생성</span></div>
+          <div class="sw-item"><span class="sw-icon">🔄</span><span><strong>반복·패턴 처리</strong> — 동일 구조의 작업(코딩, 번역, 형식 변환)을 지치지 않고 처리</span></div>
+          <div class="sw-item"><span class="sw-icon">💬</span><span><strong>환자 언어 번역</strong> — 어려운 의학 용어를 환자가 이해할 수 있는 말로 쉽게 설명</span></div>
+          <div class="sw-item"><span class="sw-icon">🌍</span><span><strong>다국어 지원</strong> — 외국어 자료 번역, 다국어 환자 대화 보조</span></div>
+          <div class="sw-item"><span class="sw-icon">🔍</span><span><strong>가능성 목록화</strong> — 감별진단 후보를 빠르게 나열하고 정리</span></div>
+        </div>
+      </div>
+      <div class="sw-col bad">
+        <div class="sw-col-head">
+          <span>❌</span> 한계·위험 영역
+        </div>
+        <div class="sw-col-body">
+          <div class="sw-item"><span class="sw-icon">🎭</span><span><strong>환각(Hallucination)</strong> — 없는 사실을 자신 있게 지어냄. 틀린 약용량, 가짜 논문 인용</span></div>
+          <div class="sw-item"><span class="sw-icon">🏥</span><span><strong>실제 환자 맥락 없음</strong> — 실험실 수치, 활력징후, 병력을 직접 "보는" 게 아님</span></div>
+          <div class="sw-item"><span class="sw-icon">📅</span><span><strong>지식 시점 한계</strong> — 학습 데이터 이후의 최신 가이드라인을 모를 수 있음</span></div>
+          <div class="sw-item"><span class="sw-icon">⚖️</span><span><strong>임상 판단 불가</strong> — "이 환자에게 이 처치가 최선인가"는 의사의 영역</span></div>
+          <div class="sw-item"><span class="sw-icon">🔐</span><span><strong>개인정보 보안</strong> — 실명·주민번호·진단명을 입력하면 개인정보 위험</span></div>
+          <div class="sw-item"><span class="sw-icon">📏</span><span><strong>컨텍스트 한계</strong> — 긴 병력서를 한 번에 처리하면 앞부분을 "잊어버림"</span></div>
+        </div>
+      </div>
     </div>
-    <article class="hero">
-      <div class="label">의사가 배우는 AI · 2편</div>
-      <h1>AI가 잘하는 일과 못하는 일</h1>
-      <p class="lead">의료에서 AI를 안전하게 쓰려면 먼저 "어디까지 맡길 수 있는가"보다 "어디서부터 사람이 직접 판단해야 하는가"를 구분해야 합니다.</p>
-      <p class="meta">대상: 전공의, 전문의, 개원의 / 난이도: 입문 / 주제: AI 리터러시, 윤리, 검증</p>
-    </article>
+  </section>
 
-    <section class="takeaway">
-      <strong>이 글의 한 문장 요약</strong>
-      <p>AI는 정리와 초안에는 강하지만, 의료에서의 최종 판단과 근거 검증은 끝까지 사람이 맡아야 합니다.</p>
-    </section>
-
-    <section class="box">
-      <h2>AI가 비교적 잘하는 일</h2>
-      <ul>
-        <li>길고 복잡한 메모를 일정한 형식으로 정리하기</li>
-        <li>환자 설명문, 교육 자료, 발표 개요의 초안 만들기</li>
-        <li>회의록이나 문헌 내용을 빠르게 요약하고 핵심 질문 뽑기</li>
-        <li>같은 뜻의 표현을 더 쉬운 언어로 바꾸기</li>
-      </ul>
-    </section>
-
-    <section class="box">
-      <h2>AI가 위험해지는 장면</h2>
-      <ol>
-        <li>근거가 필요한 임상 판단을 출처 확인 없이 단정적으로 말할 때</li>
-        <li>환자 정보가 섞인 원문을 그대로 외부 도구에 넣을 때</li>
-        <li>사용자가 원하는 답을 맞춰주려다 틀린 내용을 자연스럽게 만들어낼 때</li>
-        <li>의학적으로 비슷해 보이는 개념을 혼동해도 문장은 그럴듯하게 유지될 때</li>
-      </ol>
-    </section>
-
-    <section class="box">
-      <h2>의사가 기억해야 할 기준</h2>
-      <p>AI는 구조화, 표현 변환, 초안 작성에는 강하지만 근거 확인, 책임 판단, 맥락 해석은 불완전합니다. 특히 "답변이 매끄럽다"는 이유만으로 정확하다고 느끼기 쉬운 점이 가장 위험합니다.</p>
-      <p>따라서 의사는 AI를 사용할 때 항상 두 단계를 분리해야 합니다. 첫째는 초안을 받는 단계, 둘째는 검증하는 단계입니다. 이 두 단계를 섞는 순간 오류가 임상 현장으로 들어오게 됩니다.</p>
-    </section>
-
-    <section class="box">
-      <h2>현장에서 바로 적용할 질문</h2>
-      <ul>
-        <li>이 결과는 요약인가, 해석인가, 판단인가</li>
-        <li>근거를 확인할 원문이나 출처가 있는가</li>
-        <li>틀렸을 때 환자에게 직접 위해가 생기는가</li>
-        <li>이 문장을 그대로 써도 되는지 최종 검토를 했는가</li>
-      </ul>
-    </section>
-
-    <section class="box">
-      <h2>주의할 점</h2>
-      <div class="warn">AI는 "모른다"보다 "그럴듯하게 틀린다"에 더 가깝습니다. 의학적 결정에 가까워질수록 사용 범위를 줄이고 검증 강도를 높여야 합니다.</div>
-    </section>
-
-    <section class="box">
-      <h2>바로 써볼 프롬프트</h2>
-      <div class="prompt">아래 문장을 읽고, 각 문장을
-1) 단순 요약
-2) 해석 포함
-3) 근거 확인이 필요한 주장
-으로 분류해 주세요.
-의학적으로 위험할 수 있는 표현은 따로 표시해 주세요.
-
-[문장 붙여넣기]</div>
-    </section>
-
-    <section class="box">
-      <h2>마무리</h2>
-      <p>AI를 잘 쓰는 의사는 답을 빨리 얻는 사람이 아니라, AI가 틀릴 수 있는 지점을 먼저 보는 사람입니다.</p>
-      <p>다음 편에서는 외래 전후에 AI를 붙일 수 있는 구체적인 업무 장면을 정리합니다.</p>
-      <div class="nav-duo">
-      <a class="nav-block" href="./11-doctors-learning-ai-intro.html">
-        <span class="nav-dir">← 이전</span>
-        <span class="nav-title">의사가 AI를 배워야 하는 이유</span>
-      </a>
-      <a class="nav-home" href="./home.html">목록</a>
-      <a class="nav-block nav-r" href="./13-ai-in-outpatient-workflow.html">
-        <span class="nav-dir">다음 →</span>
-        <span class="nav-title">외래 전후에 AI를 쓰는 5가지 장면</span>
-      </a>
+  <!-- 중간퀴즈 1 -->
+  <section class="fade">
+    <div class="sec-label">중간 체크</div>
+    <h2>방금 배운 내용 확인</h2>
+    <div class="quiz-block">
+      <div class="quiz-q">Q. 다음 중 현재 AI(LLM)가 가장 잘 수행할 수 있는 작업은?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'q1')">환자의 신체검진 소견을 바탕으로 즉각적인 최종진단 내리기</button>
+        <button class="quiz-opt" data-correct="true"  onclick="checkQ(this,'q1')">복잡한 의학 개념을 환자가 이해할 수 있는 언어로 설명하기</button>
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'q1')">오늘 발표된 최신 임상가이드라인을 실시간으로 반영하기</button>
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'q1')">환자의 생체 신호를 실시간으로 모니터링하기</button>
+      </div>
+      <div class="quiz-fb" id="q1"></div>
     </div>
-    </section>
-    <p class="sitefoot">Copyright 2026 S-REBORN. 문의 및 운영 조정은 내부 콘텐츠 관리자 기준에 따라 진행합니다.</p>
-  </main>
+  </section>
+
+  <!-- 3대 한계 아코디언 -->
+  <section class="fade">
+    <div class="sec-label">깊이 이해하기</div>
+    <h2>반드시 알아야 할 3가지 한계</h2>
+    <p>AI를 안전하게 사용하려면 이 세 가지 개념을 임상에서 직접 적용할 수 있어야 합니다. 각 항목을 클릭해 보세요.</p>
+
+    <div class="concept-list">
+      <!-- 환각 -->
+      <div class="concept-item" id="c1">
+        <button class="concept-btn" onclick="toggleConcept('c1')">
+          <div class="concept-icon" style="background:#fef2f2;font-size:1.5rem">🎭</div>
+          <span class="concept-title">환각(Hallucination) — AI가 지어내는 거짓 사실</span>
+          <span class="concept-badge">가장 위험</span>
+          <span class="concept-arrow">▼</span>
+        </button>
+        <div class="concept-body">
+          <p>AI는 "모른다"고 말하는 대신, 그럴듯해 보이는 내용을 자신 있게 생성하는 경향이 있습니다. 이를 <strong>환각(Hallucination)</strong>이라고 합니다. 통계나 약용량처럼 구체적인 숫자를 포함한 문장에서 특히 자주 발생합니다.</p>
+          <div class="concept-example">
+            <strong>⚠️ 임상 예시:</strong> "이 항생제의 신기능 저하 환자 용량 조절 기준을 알려줘"라고 물었을 때, AI가 실제 가이드라인과 다른 용량을 자신 있게 답할 수 있습니다. 반드시 공식 처방 참고 데이터베이스(Micromedex, 식품의약품안전처)로 교차 확인하세요.
+          </div>
+          <p style="margin-top:.75rem">📌 <strong>대응법:</strong> 임상 결정에 영향을 주는 수치나 약물 정보는 반드시 1차 출처에서 확인합니다.</p>
+        </div>
+      </div>
+
+      <!-- 컨텍스트 한계 -->
+      <div class="concept-item" id="c2">
+        <button class="concept-btn" onclick="toggleConcept('c2')">
+          <div class="concept-icon" style="background:#eff6ff;font-size:1.5rem">📏</div>
+          <span class="concept-title">컨텍스트 한계 — 긴 대화에서 앞을 "잊는" 문제</span>
+          <span class="concept-badge">실용적 주의</span>
+          <span class="concept-arrow">▼</span>
+        </button>
+        <div class="concept-body">
+          <p>AI는 한 번에 처리할 수 있는 텍스트 양(컨텍스트 윈도우)이 제한되어 있습니다. 매우 긴 대화나 방대한 의무기록을 입력하면, 초반에 언급한 중요한 정보를 나중 답변에서 빠뜨리거나 왜곡할 수 있습니다.</p>
+          <div class="concept-example">
+            <strong>⚠️ 임상 예시:</strong> 30페이지 분량의 입원 경과기록을 통째로 붙여넣고 요약을 요청하면, 초반 입원 이유나 알레르기 정보가 요약에서 누락될 수 있습니다.
+          </div>
+          <p style="margin-top:.75rem">📌 <strong>대응법:</strong> 긴 작업은 섹션별로 나눠서 요청합니다. 핵심 정보는 매 요청마다 다시 명시하세요.</p>
+        </div>
+      </div>
+
+      <!-- 지식 시점 한계 -->
+      <div class="concept-item" id="c3">
+        <button class="concept-btn" onclick="toggleConcept('c3')">
+          <div class="concept-icon" style="background:#fefce8;font-size:1.5rem">📅</div>
+          <span class="concept-title">지식 시점 한계 — 학습 이후의 세계를 모른다</span>
+          <span class="concept-badge">업데이트 필요</span>
+          <span class="concept-arrow">▼</span>
+        </button>
+        <div class="concept-body">
+          <p>AI는 특정 시점까지의 데이터로 학습됩니다. <strong>학습 종료일(knowledge cutoff) 이후에 개정된 임상가이드라인, 새로 승인된 약물, 최신 연구 결과는 알지 못합니다.</strong> 이를 무비판적으로 수용하면 구식 정보로 임상 결정을 내릴 수 있습니다.</p>
+          <div class="concept-example">
+            <strong>⚠️ 임상 예시:</strong> 심방세동 항응고 치료 1차 선택약에 대해 물었을 때, 최신 가이드라인이 업데이트되었음에도 이전 권고안을 답할 수 있습니다.
+          </div>
+          <p style="margin-top:.75rem">📌 <strong>대응법:</strong> 가이드라인 관련 질문은 반드시 최신 학회 사이트(AHA, ESC, 대한의학회)에서 현재 권고안을 확인합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI할까? 내가 할까? 게임 -->
+  <section class="fade">
+    <div class="sec-label">인터랙티브 게임</div>
+    <h2>AI할까? 내가 할까?</h2>
+    <p>다음 5가지 임상 시나리오에서, 각각 AI에게 맡겨야 할지 의사가 직접 해야 할지 골라보세요.</p>
+
+    <div class="game-wrap">
+      <div class="game-score-bar">
+        <span class="game-score-label">현재 점수</span>
+        <span class="game-score-val" id="gameScore">0 / 5</span>
+      </div>
+
+      <!-- 시나리오 1 -->
+      <div class="scenario-card" id="s1">
+        <div class="scenario-num">시나리오 01</div>
+        <div class="scenario-q">응급실에서 chest pain 환자가 왔습니다. STEMI 진단 후 즉각적인 PCI 결정이 필요합니다.</div>
+        <div class="scenario-btns">
+          <button class="scenario-btn ai" onclick="checkScenario('s1','ai')">🤖 AI에게 결정 맡기기</button>
+          <button class="scenario-btn doc" onclick="checkScenario('s1','doc')">👨‍⚕️ 의사가 직접 결정</button>
+          <button class="scenario-btn both" onclick="checkScenario('s1','both')">🤝 AI + 의사 협력</button>
+        </div>
+        <div class="scenario-result" id="s1r">응급 PCI 결정은 <strong>의사의 임상 판단 영역</strong>입니다. AI는 실제 환자 상태(ECG, 활력징후, 병력)를 실시간으로 볼 수 없고, 법적·윤리적 책임도 의사에게 있습니다.</div>
+      </div>
+
+      <!-- 시나리오 2 -->
+      <div class="scenario-card" id="s2">
+        <div class="scenario-num">시나리오 02</div>
+        <div class="scenario-q">당뇨 환자에게 새로 처방한 약물이 기존 복용약과 상호작용이 있는지 빠르게 검토하고 싶습니다.</div>
+        <div class="scenario-btns">
+          <button class="scenario-btn ai" onclick="checkScenario('s2','ai')">🤖 AI로 1차 검토</button>
+          <button class="scenario-btn doc" onclick="checkScenario('s2','doc')">👨‍⚕️ 의사가 직접 검토만</button>
+          <button class="scenario-btn both" onclick="checkScenario('s2','both')">🤝 AI 검토 + 공식DB 확인</button>
+        </div>
+        <div class="scenario-result" id="s2r">AI로 <strong>1차 상호작용 목록을 빠르게 확인</strong>한 후, 반드시 Micromedex/UpToDate 등 공식 DB로 검증하는 방식이 효율적이고 안전합니다.</div>
+      </div>
+
+      <!-- 시나리오 3 -->
+      <div class="scenario-card" id="s3">
+        <div class="scenario-num">시나리오 03</div>
+        <div class="scenario-q">환자 보호자에게 복잡한 암 진단 결과를 설명하는 동의서 초안이 필요합니다.</div>
+        <div class="scenario-btns">
+          <button class="scenario-btn ai" onclick="checkScenario('s3','ai')">🤖 AI가 초안 작성</button>
+          <button class="scenario-btn doc" onclick="checkScenario('s3','doc')">👨‍⚕️ 의사가 처음부터 작성</button>
+          <button class="scenario-btn both" onclick="checkScenario('s3','both')">🤝 AI 초안 + 의사 검토·수정</button>
+        </div>
+        <div class="scenario-result" id="s3r"><strong>AI 초안 + 의사 검토</strong>가 최적입니다. AI가 쉬운 언어로 초안을 빠르게 만들고, 의사가 환자 상황에 맞게 개인화하고 서명합니다.</div>
+      </div>
+
+      <!-- 시나리오 4 -->
+      <div class="scenario-card" id="s4">
+        <div class="scenario-num">시나리오 04</div>
+        <div class="scenario-q">학회 발표를 위해 최신 메타분석 논문 10편의 핵심 내용을 빠르게 정리하고 싶습니다.</div>
+        <div class="scenario-btns">
+          <button class="scenario-btn ai" onclick="checkScenario('s4','ai')">🤖 AI가 요약·정리</button>
+          <button class="scenario-btn doc" onclick="checkScenario('s4','doc')">👨‍⚕️ 의사가 직접 논문 읽기만</button>
+          <button class="scenario-btn both" onclick="checkScenario('s4','both')">🤝 AI 요약 + 원문 확인</button>
+        </div>
+        <div class="scenario-result" id="s4r">논문 요약·정리는 <strong>AI가 특히 강한 영역</strong>입니다. 단, AI가 논문 내용을 환각할 수 있으므로 중요 수치는 원문에서 확인합니다.</div>
+      </div>
+
+      <!-- 시나리오 5 -->
+      <div class="scenario-card" id="s5">
+        <div class="scenario-num">시나리오 05</div>
+        <div class="scenario-q">외래 진료 중 환자가 "이 약 부작용이 뭐예요?"라고 묻는데, 기억이 잘 나지 않습니다.</div>
+        <div class="scenario-btns">
+          <button class="scenario-btn ai" onclick="checkScenario('s5','ai')">🤖 AI에게 물어보기</button>
+          <button class="scenario-btn doc" onclick="checkScenario('s5','doc')">👨‍⚕️ 공식 처방정보만 확인</button>
+          <button class="scenario-btn both" onclick="checkScenario('s5','both')">🤝 AI + 식약처 허가정보 확인</button>
+        </div>
+        <div class="scenario-result" id="s5r">AI로 빠르게 개요를 파악한 후 <strong>식약처 허가정보나 공식 처방집</strong>으로 확인하는 것이 권장됩니다. 환자에게 전달할 정보는 공식 출처 기반이어야 합니다.</div>
+      </div>
+
+      <div class="game-final" id="gameFinal">
+        <div class="game-final-score" id="gameFinalScore"></div>
+        <div class="game-final-msg" id="gameFinalMsg"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 안전한 프롬프트 -->
+  <section class="fade">
+    <div class="sec-label">실전 프롬프트</div>
+    <h2>환각을 줄이는 프롬프트 작성법</h2>
+    <p>AI에게 출처 명시를 요청하고, 불확실한 경우 인정하도록 유도하면 환각을 상당히 줄일 수 있습니다.</p>
+
+    <div class="prompt-box">
+      <div class="prompt-label">복사 가능한 프롬프트 템플릿</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+      <div class="prompt-text" id="promptText">[약물명] 신기능 저하(eGFR 30 미만) 환자에서의 용량 조절 기준을 알려줘.
+
+조건:
+1. 답변에 사용한 주요 근거(가이드라인명 또는 참고 기준)를 함께 명시해줘
+2. 확실하지 않은 내용은 "확인 필요"라고 표시해줘
+3. 내 진료실에서 최종 확인은 Micromedex 또는 식약처 허가정보로 하겠다고 이해하고 답해줘</div>
+    </div>
+    <p style="font-size:.875rem">위 템플릿의 핵심: <strong>근거 명시 요청</strong> + <strong>불확실성 인정 유도</strong> + <strong>교차확인 의지 명시</strong></p>
+  </section>
+
+  <!-- 퀴즈 세트 -->
+  <section class="fade">
+    <div class="sec-label">최종 퀴즈</div>
+    <h2>2편 학습 확인</h2>
+
+    <div class="quiz-set">
+      <div class="quiz-block">
+        <div class="quiz-q">Q1. AI가 없는 사실을 자신 있게 생성하는 현상을 무엇이라고 하나요?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf1')">딥페이크(Deepfake)</button>
+          <button class="quiz-opt" data-correct="true"  onclick="checkQ(this,'qf1')">환각(Hallucination)</button>
+          <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf1')">오버피팅(Overfitting)</button>
+          <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf1')">편향(Bias)</button>
+        </div>
+        <div class="quiz-fb" id="qf1"></div>
+      </div>
+
+      <div class="quiz-block">
+        <div class="quiz-q">Q2. AI에게 약물 용량을 물었을 때 가장 안전한 다음 단계는?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf2')">AI가 자신 있게 답하면 그대로 처방한다</button>
+          <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf2')">AI가 틀릴 수 있으므로 절대 사용하지 않는다</button>
+          <button class="quiz-opt" data-correct="true"  onclick="checkQ(this,'qf2')">AI 답변을 참고한 후 공식 처방 DB로 교차확인한다</button>
+          <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf2')">AI에게 같은 질문을 여러 번 반복해 다수결로 확인한다</button>
+        </div>
+        <div class="quiz-fb" id="qf2"></div>
+      </div>
+
+      <div class="quiz-block">
+        <div class="quiz-q">Q3. 매우 긴 병력 기록을 AI에게 한 번에 입력할 때 발생할 수 있는 문제는?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf3')">AI가 처리 속도가 너무 느려진다</button>
+          <button class="quiz-opt" data-correct="true"  onclick="checkQ(this,'qf3')">컨텍스트 한계로 인해 초반 정보를 누락하거나 왜곡할 수 있다</button>
+          <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf3')">AI가 자동으로 요약을 거부한다</button>
+          <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf3')">개인정보 문제가 자동으로 발생한다</button>
+        </div>
+        <div class="quiz-fb" id="qf3"></div>
+      </div>
+    </div>
+    <div class="quiz-total" id="quizTotal">
+      <div class="quiz-total-score" id="quizTotalScore"></div>
+      <div class="quiz-total-msg" id="quizTotalMsg"></div>
+    </div>
+  </section>
+
+  <!-- 핵심 요약 -->
+  <section class="fade">
+    <div class="summary">
+      <h3>📋 2편 핵심 요약</h3>
+      <div class="summary-list">
+        <div class="summary-row">AI는 문서 작성, 지식 합성, 언어 변환에서 강력하지만, 실제 환자 판단과 최종 임상 결정은 의사의 영역이다.</div>
+        <div class="summary-row">환각(Hallucination): AI는 모르는 내용을 인정하지 않고 그럴듯하게 지어낼 수 있다. 약물·수치 관련 정보는 반드시 공식 출처 교차확인.</div>
+        <div class="summary-row">컨텍스트 한계: 긴 텍스트는 분할 입력하고, 핵심 정보는 매 요청마다 재명시한다.</div>
+        <div class="summary-row">지식 시점 한계: AI는 최신 가이드라인을 모를 수 있다. 임상 기준 업데이트는 학회 공식 채널에서 확인한다.</div>
+        <div class="summary-row">안전한 AI 활용 = AI 활용 + 공식 출처 교차확인 + 의사의 최종 판단</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 하단 네비게이션 -->
+  <div class="nav-bottom">
+    <a href="11-doctors-learning-ai-intro.html" class="nav-btn">← 1편: AI 도입이 필요한 이유</a>
+    <a href="index.html" class="nav-btn">🏠 목차</a>
+    <a href="13-ai-in-outpatient-workflow.html" class="nav-btn primary">3편: 외래 진료 워크플로우 →</a>
+  </div>
+
+</div>
+
+<script>
+  // progress bar
+  window.addEventListener('scroll',()=>{
+    const el=document.getElementById('pbar');
+    const h=document.documentElement;
+    const pct=(h.scrollTop||document.body.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+    el.style.width=pct+'%';
+  });
+
+  // fade in
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+
+  // concept accordion
+  function toggleConcept(id){
+    const el=document.getElementById(id);
+    const isOpen=el.classList.contains('open');
+    document.querySelectorAll('.concept-item').forEach(c=>c.classList.remove('open'));
+    if(!isOpen) el.classList.add('open');
+  }
+
+  // quiz
+  function checkQ(btn,id){
+    const block=btn.closest('.quiz-block');
+    block.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
+    const fb=document.getElementById(id);
+    if(btn.dataset.correct==='true'){
+      btn.classList.add('correct');
+      fb.className='quiz-fb show ok';
+      fb.textContent='✅ 정답입니다!';
+    } else {
+      btn.classList.add('wrong');
+      fb.className='quiz-fb show ng';
+      fb.textContent='❌ 오답입니다. 정답을 확인해 보세요.';
+      block.querySelectorAll('[data-correct="true"]').forEach(b=>b.classList.add('correct'));
+    }
+    checkQuizTotal();
+  }
+
+  function checkQuizTotal(){
+    const finals=['qf1','qf2','qf3'];
+    const answered=finals.filter(id=>{
+      const fb=document.getElementById(id);
+      return fb&&fb.classList.contains('show');
+    });
+    if(answered.length===finals.length){
+      const correct=answered.filter(id=>document.getElementById(id).classList.contains('ok')).length;
+      const el=document.getElementById('quizTotal');
+      el.classList.add('show');
+      document.getElementById('quizTotalScore').textContent=correct+' / 3';
+      const msgs=['한 번 더 복습해 보세요!','절반 이상 맞혔어요. 조금 더 복습해 봐요.','거의 다 왔어요!','완벽합니다! 2편 완전 이해!'];
+      document.getElementById('quizTotalMsg').textContent=msgs[correct]||msgs[3];
+    }
+  }
+
+  // scenario game
+  const answers={s1:'doc',s2:'both',s3:'both',s4:'ai',s5:'both'};
+  let gameScore=0,answered=0;
+  function checkScenario(id,choice){
+    const card=document.getElementById(id);
+    if(card.classList.contains('correct')||card.classList.contains('wrong')) return;
+    card.querySelectorAll('.scenario-btn').forEach(b=>b.disabled=true);
+    const correct=answers[id];
+    const result=document.getElementById(id+'r');
+    if(choice===correct){
+      card.classList.add('correct');
+      gameScore++;
+    } else {
+      card.classList.add('wrong');
+    }
+    answered++;
+    document.getElementById('gameScore').textContent=gameScore+' / 5';
+    if(answered===5){
+      const final=document.getElementById('gameFinal');
+      final.style.display='block';
+      document.getElementById('gameFinalScore').textContent=gameScore+' / 5';
+      const msgs=['AI 활용 개념을 다시 살펴보세요.','좋아요! 조금 더 연습해 봐요.','잘하고 있어요!','훌륭합니다!','완벽한 AI 판단력!'];
+      document.getElementById('gameFinalMsg').textContent=msgs[gameScore];
+    }
+  }
+
+  // copy prompt
+  function copyPrompt(btn){
+    const text=document.getElementById('promptText').textContent;
+    navigator.clipboard.writeText(text).then(()=>{
+      btn.textContent='복사됨 ✓';
+      setTimeout(()=>btn.textContent='복사',2000);
+    });
+  }
+</script>
 </body>
 </html>

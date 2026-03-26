@@ -3,283 +3,529 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>의료 현장에서 안전하게 프롬프트 쓰는 법</title>
-  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
-  <link rel="apple-touch-icon" href="./assets/s-reborn-logo.svg" />
-  <meta name="description" content="의료 현장에서 생성형 AI 프롬프트를 작성할 때 지켜야 할 안전 기준과 실전 문장 구조를 소개하는 글." />
-  <link rel="canonical" href="./14-safe-medical-prompting.html" />
-  <meta name="thumbnail_alt" content="의료 현장에서 안전한 프롬프트 작성을 상징하는 대표 이미지" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="의료 현장에서 안전하게 프롬프트 쓰는 법 | S-Reborn" />
-  <meta property="og:description" content="의료 현장에서 생성형 AI 프롬프트를 작성할 때 지켜야 할 안전 기준과 실전 문장 구조를 소개하는 글." />
-  <meta property="og:image" content="./thumbnails/prompt.svg" />
-  <meta property="og:image:alt" content="의료 현장에서 안전한 프롬프트 작성을 상징하는 대표 이미지" />
-  <meta property="og:locale" content="ko_KR" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="의료 현장에서 안전하게 프롬프트 쓰는 법 | S-Reborn" />
-  <meta name="twitter:description" content="의료 현장에서 생성형 AI 프롬프트를 작성할 때 지켜야 할 안전 기준과 실전 문장 구조를 소개하는 글." />
-  <meta name="twitter:image" content="./thumbnails/prompt.svg" />
-  <meta name="twitter:image:alt" content="의료 현장에서 안전한 프롬프트 작성을 상징하는 대표 이미지" />
-  <script type="application/json" class="frontmatter">
-    {
-      "content_id": "doctor-ai-004",
-      "title": "의료 현장에서 안전하게 프롬프트 쓰는 법",
-      "slug": "safe-prompting-for-medical-workflows",
-      "content_type": "article",
-      "series": "의사가 배우는 AI",
-      "series_order": 4,
-      "status": "published",
-      "publish_priority": 2,
-      "recommended_order": 5,
-      "primary_keyword": "프롬프트 작성",
-      "thumbnail_label": "Prompt",
-      "thumbnail_image": "./thumbnails/prompt.svg",
-      "thumbnail_alt": "의료 현장에서 안전한 프롬프트 작성을 상징하는 대표 이미지",
-      "audience": ["resident", "fellow", "specialist", "medical educator"],
-      "difficulty": "intermediate",
-      "specialty": ["common"],
-      "topic_groups": ["clinical workflow", "ethics", "documentation"],
-      "keywords": ["프롬프트 작성", "의료 AI 보안", "검증", "문서 자동화", "환각 방지"],
-      "hashtags": ["#의사가배우는AI", "#의료AI", "#프롬프트", "#AI리터러시", "#SReborn"],
-      "seo_title": "의료 현장에서 안전하게 프롬프트 쓰는 법 | S-Reborn",
-      "seo_description": "의료 현장에서 생성형 AI 프롬프트를 작성할 때 지켜야 할 안전 기준과 실전 문장 구조를 소개하는 글.",
-      "cta": "다음 편에서는 전공의 교육과 연구에 AI를 붙이는 방법을 다룹니다.",
-      "updated_at": "2026-03-23",
-      "owner": "codex"
-    }
-  </script>
+  <title>4편 — 안전한 의료 프롬프팅 | 의사를 위한 AI</title>
   <style>
-    :root {
-      --bg: #fbf7f1;
-      --ink: #1d2328;
-      --muted: #5f6870;
-      --brand: #155d4b;
-      --line: #ddd4c6;
-      --card: #fffdf9;
-      --accent: #bf5f2f;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background:
-        radial-gradient(circle at left top, #f3ead8 0, transparent 20%),
-        linear-gradient(180deg, #fbf7f1 0%, #f4ede2 100%);
-      color: var(--ink);
-      font-family: "Segoe UI", "Malgun Gothic", sans-serif;
-      line-height: 1.75;
-    }
-    .page { max-width: 860px; margin: 0 auto; padding: 56px 20px 88px; }
-    .topnav {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .brandmark {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--ink);
-      text-decoration: none;
-      font-weight: 700;
-    }
-    .brandmark img {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-    }
-    .hero, .box {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      box-shadow: 0 12px 34px rgba(29, 35, 40, 0.06);
-    }
-    .hero { padding: 36px; }
-    .box { margin-top: 20px; padding: 28px; }
-    .label {
-      display: inline-block;
-      margin-bottom: 14px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: #e9f2ee;
-      color: var(--brand);
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.04em;
-    }
-    h1, h2 { line-height: 1.28; margin: 0 0 14px; }
-    h1 { font-size: 38px; }
-    h2 { font-size: 28px; }
-    p { margin: 0 0 14px; }
-    .lead { font-size: 19px; color: var(--muted); }
-    ul, ol { margin: 0; padding-left: 22px; }
-    li { margin-bottom: 10px; }
-    .prompt {
-      background: #f5efe6;
-      border-radius: 16px;
-      padding: 18px;
-      border: 1px solid #e6d8c8;
-      white-space: pre-wrap;
-      font-family: Consolas, monospace;
-      font-size: 14px;
-    }
-    .warn {
-      padding: 16px 18px;
-      border-left: 4px solid var(--accent);
-      background: #fbf1ea;
-      border-radius: 14px;
-    }
-    .meta { color: var(--muted); font-size: 14px; }
-    .takeaway {
-      margin-top: 20px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      background: #eef4ef;
-      border: 1px solid #d6e3da;
-    }
-    .takeaway strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--brand);
-    }
-    .series-nav {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 22px;
-      flex-wrap: wrap;
-    }
-    .series-link {
-      color: var(--brand);
-      font-weight: 700;
-      text-decoration: none;
-    }
-    /* ── 시리즈 네비게이션 공통 ── */
-    .breadcrumb{font-size:13px;color:var(--muted);margin-bottom:12px}
-    .breadcrumb a{color:var(--muted);text-decoration:none}
-    .breadcrumb a:hover{color:var(--brand);text-decoration:underline}
-    .series-progress{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:20px;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px}
-    .sp-label{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.04em;margin-right:4px;white-space:nowrap}
-    .sp-step{display:inline-flex;align-items:center;justify-content:center;padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;color:var(--muted);border:1px solid var(--line);transition:border-color .15s,color .15s;white-space:nowrap}
-    .sp-step:hover{border-color:var(--brand);color:var(--brand)}
-    .sp-step.on{background:var(--brand);color:#fff;border-color:var(--brand)}
-    .nav-duo{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;margin-top:24px;align-items:stretch}
-    .nav-block{display:flex;flex-direction:column;gap:3px;padding:14px 18px;background:var(--card);border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink);transition:border-color .15s,box-shadow .15s}
-    .nav-block:hover{border-color:var(--brand);box-shadow:0 4px 14px rgba(21,93,75,.09)}
-    .nav-dir{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-    .nav-title{font-size:14px;font-weight:700;color:var(--brand);line-height:1.3}
-    .nav-r{text-align:right}
-    .nav-home{display:inline-flex;align-items:center;justify-content:center;padding:0 16px;min-width:56px;background:#f0ebe2;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--muted);font-size:13px;font-weight:700;white-space:nowrap}
-    .nav-home:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
-    @media(max-width:600px){.nav-duo{grid-template-columns:1fr}.nav-r{text-align:left}.nav-home{padding:14px}}
-    .sitefoot {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 13px;
+    :root{--brand:#155d4b;--brand-d:#0d3d30;--brand-l:#e8f4ef;--bg:#f5f1eb;--surface:#fffcf7;--ink:#18212a;--muted:#4a5562;--rule:#ddd8d0;--warn:#b45309;--danger:#dc2626;--ok:#15803d;--r:12px;--r-sm:8px}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Pretendard','Apple SD Gothic Neo',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:18px;line-height:1.75}
+    #pbar{position:fixed;top:0;left:0;height:3px;background:var(--brand);width:0%;z-index:200;transition:width .1s}
+    nav{position:sticky;top:0;z-index:100;background:rgba(255,252,247,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;gap:1rem}
+    .nav-series{font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.4px}
+    .nav-title{font-size:14px;font-weight:700;color:var(--ink)}
+    .nav-ep{font-size:13px;font-weight:700;color:var(--brand);background:var(--brand-l);padding:.2rem .6rem;border-radius:20px}
+    .series-bar{background:var(--surface);border-bottom:1px solid var(--rule);padding:.6rem 1.5rem;display:flex;align-items:center;gap:.5rem;overflow-x:auto}
+    .sp-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;text-decoration:none;transition:transform .15s}
+    .sp-dot:hover{transform:scale(1.15)}
+    .sp-dot.done{background:var(--brand);color:#fff}
+    .sp-dot.active{background:var(--brand-d);color:#fff;box-shadow:0 0 0 3px var(--brand-l)}
+    .sp-dot.todo{background:var(--rule);color:var(--muted)}
+    .sp-line{flex:1;height:2px;background:var(--rule);min-width:8px;flex-shrink:0}
+    .sp-line.done{background:var(--brand)}
+    .hero{background:linear-gradient(135deg,var(--brand-d) 0%,var(--brand) 100%);color:#fff;padding:4rem 1.5rem 3rem;text-align:center}
+    .hero-ep{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.7;margin-bottom:.75rem}
+    .hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.2;margin-bottom:1rem}
+    .hero-sub{font-size:1rem;opacity:.8;max-width:540px;margin:0 auto 1.5rem}
+    .hero-tags{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+    .hero-tag{font-size:12px;font-weight:700;background:rgba(255,255,255,.18);padding:.25rem .75rem;border-radius:20px}
+    .container{max-width:780px;margin:0 auto;padding:0 1.5rem}
+    section{padding:3rem 0}
+    section+section{border-top:1px solid var(--rule)}
+    .sec-label{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--brand);margin-bottom:.5rem}
+    h2{font-size:clamp(1.5rem,3vw,1.875rem);font-weight:900;line-height:1.25;margin-bottom:1rem;color:var(--ink)}
+    h3{font-size:1.25rem;font-weight:800;margin-bottom:.625rem;color:var(--ink)}
+    p{margin-bottom:1rem;color:var(--muted)}
+    p:last-child{margin-bottom:0}
+    .callout{background:var(--brand-l);border-left:4px solid var(--brand);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:1.125rem 1.25rem;margin:1.5rem 0;font-size:.95rem;color:var(--ink)}
+    .fade{opacity:0;transform:translateY(22px);transition:opacity .55s,transform .55s}
+    .fade.visible{opacity:1;transform:none}
+
+    /* COMP: PROMPTER 프레임워크 */
+    .frame-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.875rem;margin:1.5rem 0}
+    .frame-card{border-radius:var(--r);border:2px solid var(--rule);background:var(--surface);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s}
+    .frame-card:hover{border-color:var(--brand);transform:translateY(-2px)}
+    .frame-card.active{border-color:var(--brand);background:var(--brand-l)}
+    .frame-card-head{padding:.875rem 1rem;display:flex;align-items:center;gap:.75rem}
+    .frame-letter{width:38px;height:38px;border-radius:10px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.125rem;font-weight:900;flex-shrink:0}
+    .frame-card.active .frame-letter{background:var(--brand-d)}
+    .frame-word{font-size:.875rem;font-weight:800;color:var(--ink)}
+    .frame-ko{font-size:.75rem;color:var(--muted)}
+    .frame-detail{display:none;padding:0 1rem 1rem;font-size:.875rem;color:var(--muted);line-height:1.6}
+    .frame-card.active .frame-detail{display:block}
+    .frame-example{margin-top:.5rem;padding:.625rem .75rem;background:var(--ink);color:#e2e8f0;border-radius:6px;font-family:'Courier New',monospace;font-size:.8rem;line-height:1.6}
+
+    /* COMP: Good vs Bad */
+    .compare-set{margin:1.5rem 0;display:flex;flex-direction:column;gap:1.5rem}
+    .compare-item{border-radius:var(--r);overflow:hidden;border:2px solid var(--rule)}
+    .compare-scenario{background:var(--bg);padding:.75rem 1rem;font-size:.875rem;font-weight:700;color:var(--ink);border-bottom:1px solid var(--rule)}
+    .compare-cols{display:grid;grid-template-columns:1fr 1fr}
+    .compare-col{padding:1rem}
+    .compare-col.bad{border-right:1px solid var(--rule);background:#fef2f2}
+    .compare-col.good{background:#f0fdf4}
+    .compare-col-head{font-size:12px;font-weight:800;letter-spacing:.5px;margin-bottom:.5rem;text-transform:uppercase}
+    .compare-col.bad .compare-col-head{color:var(--danger)}
+    .compare-col.good .compare-col-head{color:var(--ok)}
+    .compare-text{font-family:'Courier New',monospace;font-size:.8rem;line-height:1.65;color:var(--ink)}
+    .compare-why{font-size:.8rem;margin-top:.625rem;padding:.5rem .625rem;border-radius:6px}
+    .compare-col.bad .compare-why{background:#fee2e2;color:#991b1b}
+    .compare-col.good .compare-why{background:#dcfce7;color:#166534}
+
+    /* COMP: Prompt Builder */
+    .builder-wrap{background:var(--surface);border:2px solid var(--rule);border-radius:var(--r);padding:1.5rem;margin:1.5rem 0}
+    .builder-title{font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:1rem}
+    .builder-fields{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.25rem}
+    .builder-field label{font-size:.8rem;font-weight:700;color:var(--muted);display:block;margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.4px}
+    .builder-field input,.builder-field select,.builder-field textarea{width:100%;padding:.625rem .875rem;border-radius:var(--r-sm);border:2px solid var(--rule);font-size:.9rem;background:var(--bg);color:var(--ink);font-family:inherit;transition:border-color .15s}
+    .builder-field input:focus,.builder-field select:focus,.builder-field textarea:focus{outline:none;border-color:var(--brand)}
+    .builder-field textarea{min-height:70px;resize:vertical}
+    .builder-btn{background:var(--brand);color:#fff;border:none;border-radius:var(--r-sm);padding:.75rem 1.5rem;font-size:.9rem;font-weight:700;cursor:pointer;transition:.15s}
+    .builder-btn:hover{background:var(--brand-d)}
+    .builder-output{display:none;margin-top:1.25rem;background:var(--ink);color:#e2e8f0;border-radius:var(--r);padding:1.25rem;position:relative}
+    .builder-output.show{display:block}
+    .builder-output-label{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#94a3b8;margin-bottom:.625rem}
+    .builder-output-text{font-family:'Courier New',monospace;font-size:.875rem;line-height:1.7;white-space:pre-wrap}
+    .copy-btn{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;padding:.35rem .75rem;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s}
+    .copy-btn:hover{background:rgba(255,255,255,.22)}
+
+    /* privacy warning */
+    .privacy-alert{background:#fef9c3;border:2px solid #fbbf24;border-radius:var(--r);padding:1.25rem 1.375rem;margin:1.5rem 0;display:flex;gap:1rem;align-items:flex-start}
+    .privacy-alert-icon{font-size:1.5rem;flex-shrink:0}
+    .privacy-alert-title{font-size:.95rem;font-weight:800;color:#92400e;margin-bottom:.375rem}
+    .privacy-alert-body{font-size:.875rem;color:#78350f;line-height:1.6}
+
+    /* quiz */
+    .quiz-block{background:var(--surface);border:2px solid var(--rule);border-radius:var(--r);padding:1.5rem;margin:1rem 0}
+    .quiz-q{font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:1rem;line-height:1.5}
+    .quiz-options{display:flex;flex-direction:column;gap:.5rem}
+    .quiz-opt{padding:.75rem 1rem;border-radius:var(--r-sm);border:2px solid var(--rule);background:none;cursor:pointer;text-align:left;font-size:.9rem;font-weight:600;color:var(--ink);transition:.15s;width:100%}
+    .quiz-opt:hover:not(:disabled){border-color:var(--brand);background:var(--brand-l)}
+    .quiz-opt.correct{border-color:var(--ok)!important;background:#f0fdf4!important;color:var(--ok)!important}
+    .quiz-opt.wrong{border-color:var(--danger)!important;background:#fef2f2!important;color:var(--danger)!important}
+    .quiz-fb{font-size:.875rem;margin-top:.75rem;padding:.75rem 1rem;border-radius:var(--r-sm);display:none;line-height:1.5}
+    .quiz-fb.show{display:block}
+    .quiz-fb.ok{background:#f0fdf4;color:#166534;border-left:3px solid var(--ok)}
+    .quiz-fb.ng{background:#fef2f2;color:#991b1b;border-left:3px solid var(--danger)}
+    .quiz-total{text-align:center;padding:1.25rem;background:var(--brand-l);border-radius:var(--r);display:none;margin-top:.5rem}
+    .quiz-total.show{display:block}
+    .quiz-total-score{font-size:2rem;font-weight:900;color:var(--brand)}
+    .quiz-total-msg{font-size:.9rem;color:var(--brand-d);font-weight:600;margin-top:.25rem}
+
+    .summary{background:var(--brand-d);color:#fff;border-radius:var(--r);padding:2rem;margin:1.5rem 0}
+    .summary h3{color:#fff;font-size:1.125rem;margin-bottom:1rem}
+    .summary-list{display:flex;flex-direction:column;gap:.625rem}
+    .summary-row{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;line-height:1.55;opacity:.92}
+    .summary-row::before{content:"✓";color:#4ade80;font-weight:900;flex-shrink:0;margin-top:.1rem}
+    .nav-bottom{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;padding:2rem 0}
+    .nav-btn{padding:.75rem 1.5rem;border-radius:var(--r-sm);font-size:.875rem;font-weight:700;text-decoration:none;border:2px solid var(--rule);color:var(--muted);background:var(--surface);transition:.15s}
+    .nav-btn:hover{border-color:var(--brand);color:var(--brand)}
+    .nav-btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .nav-btn.primary:hover{background:var(--brand-d);border-color:var(--brand-d)}
+    @media(max-width:600px){
+      .compare-cols{grid-template-columns:1fr}
+      .compare-col.bad{border-right:none;border-bottom:1px solid var(--rule)}
+      nav{padding:.625rem 1rem}
+      .hero{padding:2.5rem 1rem 2rem}
     }
   </style>
 </head>
 <body>
-  <main class="page">
-    <div class="topnav">
-      <a class="brandmark" href="./home.html"><img src="./assets/s-reborn-logo.svg" alt="S-Reborn 로고" />S-Reborn</a>
-      <a class="series-link" href="./01-doctor-ai-series-landing.html">시리즈 소개</a>
+<div id="pbar"></div>
+<nav>
+  <div>
+    <div class="nav-series">의사를 위한 AI</div>
+    <div class="nav-title">안전한 의료 프롬프팅</div>
+  </div>
+  <span class="nav-ep">4편</span>
+</nav>
+<div class="series-bar">
+  <a href="11-doctors-learning-ai-intro.html" class="sp-dot done">1</a><div class="sp-line done"></div>
+  <a href="12-ai-strengths-and-limits.html" class="sp-dot done">2</a><div class="sp-line done"></div>
+  <a href="13-ai-in-outpatient-workflow.html" class="sp-dot done">3</a><div class="sp-line done"></div>
+  <span class="sp-dot active">4</span><div class="sp-line"></div>
+  <a href="15-ai-for-resident-education-and-research.html" class="sp-dot todo">5</a><div class="sp-line"></div>
+  <span class="sp-dot todo">6</span><div class="sp-line"></div>
+  <span class="sp-dot todo">7</span><div class="sp-line"></div>
+  <span class="sp-dot todo">8</span><div class="sp-line"></div>
+  <span class="sp-dot todo">9</span><div class="sp-line"></div>
+  <span class="sp-dot todo">10</span>
+</div>
+<div class="hero">
+  <div class="hero-ep">Episode 4</div>
+  <h1>AI에게 제대로 말하는 법<br>— 안전한 의료 프롬프팅</h1>
+  <p class="hero-sub">같은 질문이라도 어떻게 물어보느냐에 따라 AI의 답변 품질이 크게 달라집니다.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">프롬프트 설계</span>
+    <span class="hero-tag">개인정보 보호</span>
+    <span class="hero-tag">PROMPTER 프레임워크</span>
+    <span class="hero-tag">임상 적용</span>
+  </div>
+</div>
+
+<div class="container">
+  <section class="fade">
+    <div class="sec-label">시나리오</div>
+    <h2>같은 질문, 다른 결과</h2>
+    <p>두 명의 의사가 같은 상황에서 AI에게 질문합니다.</p>
+    <div class="callout">
+      <strong>A 의사:</strong> "당뇨 약 뭐 써?"<br><br>
+      <strong>B 의사:</strong> "60세 남성, eGFR 45, 심부전 없음, 체중 88kg. 2형 당뇨 HbA1c 8.5%에서 메트포르민 외 추가 약물 선택 시 고려할 옵션을 근거 기반으로 나열하고, 각 옵션의 신기능 관련 주의사항을 명시해줘."<br><br>
+      B 의사의 답변이 훨씬 구체적이고 유용합니다. <strong>프롬프트 품질 = 답변 품질</strong>입니다.
     </div>
-    <p class="breadcrumb"><a href="./home.html">홈</a> › <a href="./01-doctor-ai-series-landing.html">의사가 배우는 AI</a> › 4편</p>
-    <div class="series-progress">
-      <span class="sp-label">시리즈</span>
-      <a class="sp-step" href="./01-doctor-ai-series-landing.html">소개</a>
-      <a class="sp-step" href="./11-doctors-learning-ai-intro.html">1편</a>
-      <a class="sp-step" href="./12-ai-strengths-and-limits.html">2편</a>
-      <a class="sp-step" href="./13-ai-in-outpatient-workflow.html">3편</a>
-      <a class="sp-step on" href="./14-safe-medical-prompting.html">4편</a>
-      <a class="sp-step" href="./15-ai-for-resident-education-and-research.html">5편</a>
+  </section>
+
+  <!-- PROMPTER 프레임워크 -->
+  <section class="fade">
+    <div class="sec-label">핵심 프레임워크</div>
+    <h2>PROMPTER 7원칙</h2>
+    <p>의료 AI 활용을 위한 안전하고 효과적인 프롬프팅 원칙입니다. 각 카드를 클릭해 상세 내용을 확인하세요.</p>
+    <div class="frame-grid">
+      <div class="frame-card" onclick="toggleFrame(this)">
+        <div class="frame-card-head">
+          <div class="frame-letter">P</div>
+          <div><div class="frame-word">Purpose</div><div class="frame-ko">목적 명시</div></div>
+        </div>
+        <div class="frame-detail">
+          AI에게 이 요청의 목적이 무엇인지 명확히 알려줍니다. 진단 보조인지, 기록 작성인지, 환자 교육인지 먼저 밝히세요.
+          <div class="frame-example">❌ "이 약에 대해 알려줘"
+✅ "환자 교육용으로 이 약의 복용법과 주요 부작용을 쉬운 말로 설명해줘"</div>
+        </div>
+      </div>
+      <div class="frame-card" onclick="toggleFrame(this)">
+        <div class="frame-card-head">
+          <div class="frame-letter">R</div>
+          <div><div class="frame-word">Role</div><div class="frame-ko">역할 설정</div></div>
+        </div>
+        <div class="frame-detail">
+          AI에게 어떤 역할을 맡길지 정의하면 답변 품질이 높아집니다. 의학적 맥락을 명시하세요.
+          <div class="frame-example">✅ "임상약리학 전문가의 관점에서 답해줘"
+✅ "내분비내과 전문의가 레지던트에게 설명하는 방식으로"</div>
+        </div>
+      </div>
+      <div class="frame-card" onclick="toggleFrame(this)">
+        <div class="frame-card-head">
+          <div class="frame-letter">O</div>
+          <div><div class="frame-word">Output format</div><div class="frame-ko">출력 형식</div></div>
+        </div>
+        <div class="frame-detail">
+          원하는 출력 형식을 구체적으로 지정합니다. 글머리 목록, 표, SOAP 형식 등을 명시하세요.
+          <div class="frame-example">✅ "3가지 핵심 포인트만 불릿 형식으로"
+✅ "표 형식으로 약물명/용량/주의사항 정리"</div>
+        </div>
+      </div>
+      <div class="frame-card" onclick="toggleFrame(this)">
+        <div class="frame-card-head">
+          <div class="frame-letter">M</div>
+          <div><div class="frame-word">Medical context</div><div class="frame-ko">임상 맥락</div></div>
+        </div>
+        <div class="frame-detail">
+          관련 임상 정보를 제공합니다. 단, 환자 실명·주민번호·생년월일 등 개인정보는 절대 포함하지 마세요.
+          <div class="frame-example">✅ "60대 남성, eGFR 45, 심부전 없음"
+❌ "홍길동 환자(주민번호 xxxxxx) 진료 기록"</div>
+        </div>
+      </div>
+      <div class="frame-card" onclick="toggleFrame(this)">
+        <div class="frame-card-head">
+          <div class="frame-letter">P</div>
+          <div><div class="frame-word">Privacy guard</div><div class="frame-ko">개인정보 제거</div></div>
+        </div>
+        <div class="frame-detail">
+          AI에 입력하기 전에 환자 개인정보를 모두 제거하거나 익명화합니다. 이름, 생년월일, 주민번호, 주소, 연락처는 절대 입력하지 마세요.
+          <div class="frame-example">✅ "45세 여성 환자" (익명화)
+❌ "김○○, 1979년생, 서울 강남구 거주"</div>
+        </div>
+      </div>
+      <div class="frame-card" onclick="toggleFrame(this)">
+        <div class="frame-card-head">
+          <div class="frame-letter">T</div>
+          <div><div class="frame-word">Truth check</div><div class="frame-ko">검증 요청</div></div>
+        </div>
+        <div class="frame-detail">
+          AI에게 불확실한 내용은 명시하도록 요청합니다. "모르면 모른다고 해줘"라는 지시가 환각을 줄여줍니다.
+          <div class="frame-example">✅ "확실하지 않은 내용은 '확인 필요'로 표시해줘"
+✅ "답변에 사용한 근거를 함께 명시해줘"</div>
+        </div>
+      </div>
+      <div class="frame-card" onclick="toggleFrame(this)">
+        <div class="frame-card-head">
+          <div class="frame-letter">E</div>
+          <div><div class="frame-word">Expert review</div><div class="frame-ko">전문가 최종 검토</div></div>
+        </div>
+        <div class="frame-detail">
+          AI 답변은 항상 출발점입니다. 임상 결정으로 이어지는 모든 정보는 반드시 의사가 최종 검토합니다.
+          <div class="frame-example">✅ 프롬프트 마지막에: "이 내용은 내가 직접 공식 DB로 확인할 예정이야"
+→ AI가 더 신중하게 답변하도록 유도</div>
+        </div>
+      </div>
     </div>
-    <article class="hero">
-      <div class="label">의사가 배우는 AI · 4편</div>
-      <h1>의료 현장에서 안전하게 프롬프트 쓰는 법</h1>
-      <p class="lead">좋은 프롬프트는 AI를 똑똑하게 만드는 문장이 아니라, 작업 범위와 금지선을 분명하게 정하는 지시문에 가깝습니다.</p>
-      <p class="meta">대상: 전공의, 전문의, 교육자 / 난이도: 중급 / 주제: 프롬프트 작성, 윤리, 문서화</p>
-    </article>
+  </section>
 
-    <section class="takeaway">
-      <strong>이 글의 한 문장 요약</strong>
-      <p>의료 프롬프트의 핵심은 더 많은 답을 끌어내는 것이 아니라, 추정 금지와 검토 범위를 명확히 적어 안전장치를 거는 데 있습니다.</p>
-    </section>
-
-    <section class="box">
-      <h2>좋은 프롬프트의 기본 구조</h2>
-      <ol>
-        <li>역할을 지정합니다. 예: 의료진의 문서 보조자</li>
-        <li>작업 범위를 제한합니다. 예: 요약만 수행, 판단하지 말 것</li>
-        <li>출력 형식을 지정합니다. 예: 5문장, 표, 항목 리스트</li>
-        <li>금지 조건을 명확히 적습니다. 예: 추정 금지, 모르면 확인 필요 표시</li>
-      </ol>
-    </section>
-
-    <section class="box">
-      <h2>의료에서 특히 필요한 문장</h2>
-      <ul>
-        <li>불확실한 내용은 단정하지 말고 "확인 필요"로 표시해 주세요.</li>
-        <li>원문에 없는 정보는 추가하지 마세요.</li>
-        <li>환자 친화 언어로 바꾸되 의학적 의미는 유지해 주세요.</li>
-        <li>가능하면 구조화하되 판단은 하지 마세요.</li>
-      </ul>
-    </section>
-
-    <section class="box">
-      <h2>나쁜 프롬프트의 특징</h2>
-      <p>지시가 넓고 모호하며, 원하는 형식이 없고, 추정을 막는 조건이 없습니다. 이런 경우 AI는 사용자의 기대를 맞추려다 오히려 틀린 내용을 길게 만들어낼 가능성이 높습니다.</p>
-    </section>
-
-    <section class="box">
-      <h2>실전에서 자주 쓰는 패턴</h2>
-      <ul>
-        <li>요약형: 긴 메모를 일정한 형식으로 압축</li>
-        <li>설명형: 환자 눈높이에 맞게 변환</li>
-        <li>점검형: 문장 중 위험하거나 확인 필요한 부분 표시</li>
-        <li>교육형: 발표 목차, 토론 질문, 학습 목표 생성</li>
-      </ul>
-    </section>
-
-    <section class="box">
-      <h2>주의할 점</h2>
-      <div class="warn">프롬프트를 잘 쓰는 것보다 중요한 것은 "이 작업을 AI에 맡겨도 되는가"를 먼저 묻는 습관입니다. 금지 영역을 먼저 정한 뒤 문장을 다듬는 것이 맞는 순서입니다.</div>
-    </section>
-
-    <section class="box">
-      <h2>바로 써볼 프롬프트</h2>
-      <div class="prompt">당신은 의료진의 문서 보조자입니다.
-아래 텍스트를 환자 설명용 문안으로 바꿔 주세요.
-조건:
-- 전문용어는 가능한 쉬운 표현으로 바꿀 것
-- 원문에 없는 내용은 추가하지 말 것
-- 불확실한 내용은 "의료진 확인 필요"로 표시할 것
-- 5문장 이내로 정리할 것
-
-[원문 붙여넣기]</div>
-    </section>
-
-    <section class="box">
-      <h2>마무리</h2>
-      <p>프롬프트는 기술 문장이 아니라 안전장치입니다. 의료에서는 특히 더 그렇습니다.</p>
-      <p>다음 편에서는 전공의 교육과 연구에 AI를 붙이는 방법을 다룹니다.</p>
-      <div class="nav-duo">
-      <a class="nav-block" href="./13-ai-in-outpatient-workflow.html">
-        <span class="nav-dir">← 이전</span>
-        <span class="nav-title">외래 전후에 AI를 쓰는 5가지 장면</span>
-      </a>
-      <a class="nav-home" href="./home.html">목록</a>
-      <a class="nav-block nav-r" href="./15-ai-for-resident-education-and-research.html">
-        <span class="nav-dir">다음 →</span>
-        <span class="nav-title">전공의 교육과 연구에 AI 활용</span>
-      </a>
+  <!-- 개인정보 경고 -->
+  <section class="fade">
+    <div class="sec-label">개인정보 보호</div>
+    <h2>AI에게 절대 입력하면 안 되는 것</h2>
+    <div class="privacy-alert">
+      <div class="privacy-alert-icon">⚠️</div>
+      <div>
+        <div class="privacy-alert-title">개인정보보호법 위반 주의</div>
+        <div class="privacy-alert-body">
+          환자 이름, 주민등록번호, 생년월일, 주소, 연락처, 의무기록번호 등을 상업적 AI 서비스에 입력하는 것은 <strong>개인정보보호법 위반</strong>이 될 수 있습니다. 의료기관에서 허가된 의료 특화 AI를 사용하거나, 반드시 모든 식별 정보를 제거한 후 입력하세요.
+        </div>
+      </div>
     </div>
-    </section>
-    <p class="sitefoot">Copyright 2026 S-REBORN. 문의 및 운영 조정은 내부 콘텐츠 관리자 기준에 따라 진행합니다.</p>
-  </main>
+
+    <h3>안전한 익명화 예시</h3>
+    <div class="compare-set">
+      <div class="compare-item">
+        <div class="compare-scenario">상황: 외래 환자 사례를 AI에게 질문할 때</div>
+        <div class="compare-cols">
+          <div class="compare-col bad">
+            <div class="compare-col-head">❌ 위험한 방식</div>
+            <div class="compare-text">홍길동 환자(650315-1xxxxxx), 강남구 거주, 010-xxxx 연락처.
+신장내과 추적 중 2형 당뇨 관리 방법은?</div>
+            <div class="compare-why">🚨 이름·주민번호·주소·연락처 → 개인정보보호법 위반 위험</div>
+          </div>
+          <div class="compare-col good">
+            <div class="compare-col-head">✅ 안전한 방식</div>
+            <div class="compare-text">60대 남성, eGFR 38, 단백뇨(+), 신장내과 추적 중.
+2형 당뇨 HbA1c 8.3% 조절을 위한 약물 선택 시 신기능 고려사항은?</div>
+            <div class="compare-why">✅ 개인 식별 불가 임상 정보만 사용 → 안전</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 중간 퀴즈 -->
+  <section class="fade">
+    <div class="sec-label">중간 체크</div>
+    <div class="quiz-block">
+      <div class="quiz-q">Q. 다음 중 AI 프롬프트에 포함해도 안전한 정보는?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qm1')">환자 성명과 주민등록번호</button>
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qm1')">환자 생년월일과 연락처</button>
+        <button class="quiz-opt" data-correct="true"  onclick="checkQ(this,'qm1')">나이대, 성별, 주요 검사 수치 (익명화된 임상 정보)</button>
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qm1')">의무기록번호와 입원일</button>
+      </div>
+      <div class="quiz-fb" id="qm1"></div>
+    </div>
+  </section>
+
+  <!-- Good vs Bad 비교 -->
+  <section class="fade">
+    <div class="sec-label">비교 분석</div>
+    <h2>프롬프트 좋은 예 vs 나쁜 예</h2>
+    <div class="compare-set">
+      <div class="compare-item">
+        <div class="compare-scenario">상황 1: 약물 정보 조회</div>
+        <div class="compare-cols">
+          <div class="compare-col bad">
+            <div class="compare-col-head">❌ 나쁜 프롬프트</div>
+            <div class="compare-text">리바록사반 알려줘</div>
+            <div class="compare-why">목적·맥락·형식 없음 → 일반적인 교과서 답변만 나옴</div>
+          </div>
+          <div class="compare-col good">
+            <div class="compare-col-head">✅ 좋은 프롬프트</div>
+            <div class="compare-text">비판막성 심방세동 70대 환자에게 리바록사반 처방 시, 신기능 저하(eGFR 35~49)에서의 용량 조절 기준을 표 형식으로 정리해줘. 확실하지 않은 내용은 확인 필요로 표시해줘.</div>
+            <div class="compare-why">✅ 목적+맥락+형식+검증 요청 → 실용적이고 안전한 답변</div>
+          </div>
+        </div>
+      </div>
+      <div class="compare-item">
+        <div class="compare-scenario">상황 2: 환자 교육자료 요청</div>
+        <div class="compare-cols">
+          <div class="compare-col bad">
+            <div class="compare-col-head">❌ 나쁜 프롬프트</div>
+            <div class="compare-text">당뇨 교육자료 만들어줘</div>
+            <div class="compare-why">대상·수준·형식 없음 → 너무 일반적이고 긴 내용 생성</div>
+          </div>
+          <div class="compare-col good">
+            <div class="compare-col-head">✅ 좋은 프롬프트</div>
+            <div class="compare-text">새로 진단받은 2형 당뇨 환자(50대, 초등학교 졸업 학력)를 위한 식이 교육자료를 만들어줘. A4 반 페이지 분량, 불릿 5개 이내, 의학 전문용어 없이 쉬운 한국어로.</div>
+            <div class="compare-why">✅ 대상+수준+분량+언어 지정 → 즉시 사용 가능한 교육자료</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 프롬프트 빌더 -->
+  <section class="fade">
+    <div class="sec-label">인터랙티브 도구</div>
+    <h2>나만의 프롬프트 만들기</h2>
+    <p>아래 항목을 채우면 PROMPTER 원칙이 적용된 프롬프트를 자동으로 생성합니다.</p>
+    <div class="builder-wrap">
+      <div class="builder-title">🔧 의료 프롬프트 빌더</div>
+      <div class="builder-fields">
+        <div class="builder-field">
+          <label>목적 (Purpose)</label>
+          <select id="bPurpose">
+            <option value="약물 정보 조회">약물 정보 조회</option>
+            <option value="환자 교육자료 작성">환자 교육자료 작성</option>
+            <option value="감별진단 목록화">감별진단 목록화</option>
+            <option value="진료 기록 초안 작성">진료 기록 초안 작성</option>
+            <option value="논문 요약">논문 요약</option>
+          </select>
+        </div>
+        <div class="builder-field">
+          <label>임상 맥락 (개인정보 제외)</label>
+          <textarea id="bContext" placeholder="예: 60대 남성, eGFR 45, 2형 당뇨, 심부전 없음"></textarea>
+        </div>
+        <div class="builder-field">
+          <label>원하는 출력 형식</label>
+          <select id="bFormat">
+            <option value="불릿 포인트 목록">불릿 포인트 목록</option>
+            <option value="표 형식">표 형식</option>
+            <option value="SOAP 형식">SOAP 형식</option>
+            <option value="단락 형식 설명">단락 형식 설명</option>
+            <option value="3가지 핵심 요약">3가지 핵심 요약</option>
+          </select>
+        </div>
+        <div class="builder-field">
+          <label>대상 독자</label>
+          <select id="bAudience">
+            <option value="전문의 (나 자신)">전문의 (나 자신)</option>
+            <option value="레지던트·인턴">레지던트·인턴</option>
+            <option value="초등학교 수준 환자">초등학교 수준 환자</option>
+            <option value="일반 성인 환자">일반 성인 환자</option>
+          </select>
+        </div>
+      </div>
+      <button class="builder-btn" onclick="buildPrompt()">프롬프트 생성하기 →</button>
+      <div class="builder-output" id="builderOutput">
+        <button class="copy-btn" onclick="copyBuilder()">복사</button>
+        <div class="builder-output-label">생성된 프롬프트</div>
+        <div class="builder-output-text" id="builderText"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 최종 퀴즈 -->
+  <section class="fade">
+    <div class="sec-label">최종 퀴즈</div>
+    <h2>4편 학습 확인</h2>
+    <div class="quiz-block">
+      <div class="quiz-q">Q1. PROMPTER 프레임워크에서 'T'가 의미하는 것은?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf1')">Treatment(치료 계획)</button>
+        <button class="quiz-opt" data-correct="true"  onclick="checkQ(this,'qf1')">Truth check(불확실한 내용 검증 요청)</button>
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf1')">Translation(번역 요청)</button>
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf1')">Template(템플릿 사용)</button>
+      </div>
+      <div class="quiz-fb" id="qf1"></div>
+    </div>
+    <div class="quiz-block" style="margin-top:1rem">
+      <div class="quiz-q">Q2. 더 구체적인 프롬프트가 더 좋은 AI 답변을 만드는 가장 큰 이유는?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf2')">AI가 긴 문장을 더 좋아하기 때문에</button>
+        <button class="quiz-opt" data-correct="true"  onclick="checkQ(this,'qf2')">AI가 원하는 맥락과 목적을 파악해 관련성 높은 답변을 생성할 수 있기 때문에</button>
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf2')">AI의 처리 속도가 빨라지기 때문에</button>
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf2')">짧은 프롬프트는 AI가 읽지 않기 때문에</button>
+      </div>
+      <div class="quiz-fb" id="qf2"></div>
+    </div>
+    <div class="quiz-block" style="margin-top:1rem">
+      <div class="quiz-q">Q3. AI 프롬프트에 환자 개인정보를 넣으면 안 되는 이유는?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf3')">AI 서비스가 개인정보를 이해하지 못하기 때문에</button>
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf3')">AI 답변 품질이 떨어지기 때문에</button>
+        <button class="quiz-opt" data-correct="true"  onclick="checkQ(this,'qf3')">개인정보보호법 위반이 될 수 있으며 데이터가 AI 학습에 활용될 수 있기 때문에</button>
+        <button class="quiz-opt" data-correct="false" onclick="checkQ(this,'qf3')">병원 EMR과 연동이 되기 때문에</button>
+      </div>
+      <div class="quiz-fb" id="qf3"></div>
+    </div>
+    <div class="quiz-total" id="quizTotal">
+      <div class="quiz-total-score" id="quizTotalScore"></div>
+      <div class="quiz-total-msg" id="quizTotalMsg"></div>
+    </div>
+  </section>
+
+  <section class="fade">
+    <div class="summary">
+      <h3>📋 4편 핵심 요약</h3>
+      <div class="summary-list">
+        <div class="summary-row">프롬프트 품질 = 답변 품질: 목적, 역할, 형식, 맥락을 구체적으로 명시할수록 AI 답변이 유용해진다.</div>
+        <div class="summary-row">PROMPTER 7원칙: Purpose·Role·Output·Medical context·Privacy·Truth check·Expert review</div>
+        <div class="summary-row">환자 개인정보(이름, 주민번호, 연락처 등)는 절대 AI에 입력하지 않는다. 임상 정보만 익명화해서 사용한다.</div>
+        <div class="summary-row">AI 답변은 항상 출발점: "확인 필요" 명시 요청 + 공식 출처 교차확인 + 의사의 최종 판단이 필수.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="nav-bottom">
+    <a href="13-ai-in-outpatient-workflow.html" class="nav-btn">← 3편: 외래 워크플로우</a>
+    <a href="index.html" class="nav-btn">🏠 목차</a>
+    <a href="15-ai-for-resident-education-and-research.html" class="nav-btn primary">5편: 교육·연구 활용 →</a>
+  </div>
+</div>
+
+<script>
+  window.addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    document.getElementById('pbar').style.width=((h.scrollTop||document.body.scrollTop)/(h.scrollHeight-h.clientHeight)*100)+'%';
+  });
+  const obs=new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting){i.target.classList.add('visible');obs.unobserve(i.target);}});},{threshold:.12});
+  document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+
+  function toggleFrame(card){
+    const wasActive=card.classList.contains('active');
+    document.querySelectorAll('.frame-card').forEach(c=>c.classList.remove('active'));
+    if(!wasActive) card.classList.add('active');
+  }
+
+  function buildPrompt(){
+    const purpose=document.getElementById('bPurpose').value;
+    const context=document.getElementById('bContext').value.trim()||'[임상 맥락을 입력하세요]';
+    const format=document.getElementById('bFormat').value;
+    const audience=document.getElementById('bAudience').value;
+    const text=`[목적] ${purpose}
+
+[임상 맥락] ${context}
+
+[요청]
+위 임상 맥락을 바탕으로 ${purpose}를 도와줘.
+
+[출력 조건]
+- 형식: ${format}
+- 대상 독자: ${audience}에 맞는 언어 수준
+- 확실하지 않은 내용은 "(확인 필요)"로 표시해줘
+- 답변에 사용한 주요 근거나 기준이 있다면 함께 언급해줘
+
+[주의]
+이 내용은 내가 공식 처방 DB 또는 학회 가이드라인으로 교차확인할 예정이야.`;
+    document.getElementById('builderText').textContent=text;
+    document.getElementById('builderOutput').classList.add('show');
+  }
+
+  function copyBuilder(){
+    navigator.clipboard.writeText(document.getElementById('builderText').textContent).then(()=>{
+      const btn=document.querySelector('.builder-output .copy-btn');
+      btn.textContent='복사됨 ✓';setTimeout(()=>btn.textContent='복사',2000);
+    });
+  }
+
+  let qfAnswered=0;
+  function checkQ(btn,id){
+    const block=btn.closest('.quiz-block');
+    if(block.querySelector('.quiz-opt:disabled')) return;
+    block.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
+    const fb=document.getElementById(id);
+    if(btn.dataset.correct==='true'){
+      btn.classList.add('correct');fb.className='quiz-fb show ok';fb.textContent='✅ 정답입니다!';
+    } else {
+      btn.classList.add('wrong');fb.className='quiz-fb show ng';fb.textContent='❌ 오답입니다.';
+      block.querySelectorAll('[data-correct="true"]').forEach(b=>b.classList.add('correct'));
+    }
+    if(id.startsWith('qf')){
+      const all=['qf1','qf2','qf3'].every(i=>{const f=document.getElementById(i);return f&&f.classList.contains('show');});
+      if(all){
+        const correct=['qf1','qf2','qf3'].filter(i=>document.getElementById(i).classList.contains('ok')).length;
+        const el=document.getElementById('quizTotal');el.classList.add('show');
+        document.getElementById('quizTotalScore').textContent=correct+' / 3';
+        const msgs=['복습이 필요해요.','조금 더 공부해봐요!','거의 다 왔어요!','완벽합니다!'];
+        document.getElementById('quizTotalMsg').textContent=msgs[correct];
+      }
+    }
+  }
+</script>
 </body>
 </html>
